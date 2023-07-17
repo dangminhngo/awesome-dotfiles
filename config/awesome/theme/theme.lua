@@ -163,7 +163,7 @@ theme.border_radius = 0
 -- Tooltip
 theme.tooltip_bg = theme.bg0
 theme.tooltip_fg = theme.fg
-theme.tooltip_font = theme.font_name .. " Regular 10"
+theme.tooltip_font = theme.font_name .. " Regular 11"
 
 --- Hotkeys Pop Up
 theme.hotkeys_bg = theme.black

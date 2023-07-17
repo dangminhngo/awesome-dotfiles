@@ -39,6 +39,8 @@ return function()
 			ethernet:set_color(beautiful.black)
 			tooltip:set_text("Ethernet: Disconnected")
 		end
+
+		collectgarbage("collect")
 	end)
 
 	return ethernet

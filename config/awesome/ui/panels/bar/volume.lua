@@ -48,6 +48,8 @@ return function()
 				tooltip:set_text("Volume: " .. value .. "%")
 			end
 		end)
+
+		collectgarbage("collect")
 	end)
 
 	return volume
