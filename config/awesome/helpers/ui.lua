@@ -8,6 +8,15 @@ local beautiful = require("beautiful")
 
 local _ui = {}
 
+function _ui.add_tooltip(obj, text)
+	local tooltip = awful.tooltip({
+		objects = { obj },
+		text = type(text) == "string" and text,
+		timer_function = type(text) == "function" and text,
+	})
+	return tooltip
+end
+
 function _ui.colorize_text(text, color)
 	color = color or beautiful.fg
 	return "<span foreground='" .. color .. "'>" .. text .. "</span>"
