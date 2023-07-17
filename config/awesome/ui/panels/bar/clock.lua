@@ -9,7 +9,7 @@ return function()
 		format = "%H:%M",
 		align = "center",
 		valign = "center",
-		font = beautiful.font_name .. " Medium 12",
+		font = beautiful.font_name .. " Bold 12",
 	})
 
 	clock.markup = helpers.ui.colorize_text(clock.text, beautiful.white)

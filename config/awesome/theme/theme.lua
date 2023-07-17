@@ -155,18 +155,9 @@ theme.icon_theme = "Papirus-Dark"
 
 --- Borders
 theme.border_width = 0
-theme.oof_border_width = 0
-theme.border_color_marked = theme.titlebar_bg
-theme.border_color_active = theme.titlebar_bg
-theme.border_color_normal = theme.titlebar_bg
-theme.border_color_new = theme.titlebar_bg
-theme.border_color_urgent = theme.titlebar_bg
-theme.border_color_floating = theme.titlebar_bg
-theme.border_color_maximized = theme.titlebar_bg
-theme.border_color_fullscreen = theme.titlebar_bg
 
 -- Corner Radius
-theme.border_radius = 4
+theme.border_radius = 0
 
 -- Tooltip
 theme.tooltip_bg = theme.bg0
@@ -204,7 +195,7 @@ theme.layoutlist_shape_selected = helpers.ui.rrect(theme.border_radius)
 theme.layoutlist_bg_selected = theme.widget_bg
 
 --- Gaps
-theme.useless_gap = dpi(2)
+theme.useless_gap = dpi(6)
 
 --- Systray
 theme.systray_icon_size = dpi(20)
@@ -230,12 +221,12 @@ theme.mstab_bar_ontop = true
 
 --- Notifications
 theme.notification_spacing = dpi(4)
-theme.notification_bg = theme.black
-theme.notification_bg_alt = theme.lighter_black
+theme.notification_bg = theme.dark
+theme.notification_bg_alt = theme.bg0
 
 --- Notif center
-theme.notif_center_notifs_bg = theme.one_bg2
-theme.notif_center_notifs_bg_alt = theme.one_bg3
+theme.notif_center_notifs_bg = theme.dark
+theme.notif_center_notifs_bg_alt = theme.bg0
 
 --- Swallowing
 theme.dont_swallow_classname_list = {
@@ -244,13 +235,6 @@ theme.dont_swallow_classname_list = {
 	"Google-chrome",
 	"Thunar",
 }
-
---- Layout Machi
-theme.machi_switcher_border_color = theme.lighter_black
-theme.machi_switcher_border_opacity = 0.25
-theme.machi_editor_border_color = theme.lighter_black
-theme.machi_editor_border_opacity = 0.25
-theme.machi_editor_active_opacity = 0.25
 
 gears.debug.dump(theme)
 

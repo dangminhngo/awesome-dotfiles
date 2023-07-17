@@ -4,8 +4,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local xrs = require("beautiful.xresources")
 local dpi = xrs.apply_dpi
-local helpers = require("helpers")
-local widgets = require("ui.widgets")
 local wbutton = require("ui.widgets.button")
 local animation = require("modules.animation")
 
@@ -43,18 +41,16 @@ return function(s)
 		local taglist = awful.widget.taglist({
 			screen = s,
 			filter = awful.widget.taglist.filter.all,
-			layout = { layout = wibox.layout.fixed.horizontal },
+			layout = { spacing = dpi(20), layout = wibox.layout.fixed.horizontal },
 			widget_template = {
 				widget = wibox.container.margin,
-				forced_with = dpi(40),
-				forced_height = dpi(40),
 				create_callback = function(self, c3, _)
 					local indicator = wibox.widget({
 						widget = wibox.container.place,
 						valign = "center",
 						{
 							bg = beautiful.color8,
-							forced_height = dpi(8),
+							forced_height = dpi(10),
 							shape = gears.shape.rounded_bar,
 							widget = wibox.container.background,
 						},
@@ -72,13 +68,13 @@ return function(s)
 
 					if c3.selected then
 						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(32))
+						self.indicator_animation:set(dpi(30))
 					elseif #c3:clients() == 0 then
-						self.widget.children[1].bg = beautiful.color8
-						self.indicator_animation:set(dpi(8))
+						self.widget.children[1].bg = beautiful.bg3
+						self.indicator_animation:set(dpi(15))
 					else
-						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(16))
+						self.widget.children[1].bg = beautiful.blue
+						self.indicator_animation:set(dpi(15))
 					end
 
 					--- Tag preview
@@ -96,37 +92,38 @@ return function(s)
 				update_callback = function(self, c3, _)
 					if c3.selected then
 						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(32))
+						self.indicator_animation:set(dpi(30))
 					elseif #c3:clients() == 0 then
-						self.widget.children[1].bg = beautiful.color8
-						self.indicator_animation:set(dpi(8))
+						self.widget.children[1].bg = beautiful.bg3
+						self.indicator_animation:set(dpi(15))
 					else
-						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(16))
+						self.widget.children[1].bg = beautiful.blue
+						self.indicator_animation:set(dpi(15))
 					end
 				end,
 			},
 			buttons = taglist_buttons,
 		})
 
-		local widget = widgets.button.elevated.state({
-			normal_bg = beautiful.widget_bg,
-			normal_shape = gears.shape.rounded_bar,
-			child = {
-				taglist,
-				margins = { left = dpi(10), right = dpi(10) },
-				widget = wibox.container.margin,
+		local widget = wibox.widget({
+			{
+				{
+					taglist,
+					left = dpi(16),
+					right = dpi(16),
+					widget = wibox.container.margin,
+				},
+				bg = beautiful.bg0,
+				shape = gears.shape.rounded_bar,
+				forced_width = dpi(245),
+				widget = wibox.container.background,
 			},
-			on_release = function()
-				-- awesome.emit_signal("central_panel::toggle", s)
-			end,
-		})
-
-		return wibox.widget({
-			widget,
-			margins = dpi(5),
+			top = dpi(6),
+			bottom = dpi(6),
 			widget = wibox.container.margin,
 		})
+
+		return widget
 	end
 
 	-- Systray
@@ -148,7 +145,7 @@ return function(s)
 		local system_tray_animation = animation:new({
 			easing = animation.easing.linear,
 			duration = 0.125,
-			update = function(self, pos)
+			update = function(_, pos)
 				widget.width = pos
 			end,
 		})
@@ -156,16 +153,16 @@ return function(s)
 		local arrow = wbutton.text.state({
 			text_normal_bg = beautiful.accent,
 			normal_bg = beautiful.wibar_bg,
-			font = beautiful.icon_font .. "Round ",
+			font = beautiful.icon_font .. " Round ",
 			size = 18,
-			text = "",
+			text = "",
 			on_turn_on = function(self)
 				system_tray_animation:set(400)
-				self:set_text("")
+				self:set_text("")
 			end,
 			on_turn_off = function(self)
 				system_tray_animation:set(0)
-				self:set_text("")
+				self:set_text("")
 			end,
 		})
 
@@ -234,8 +231,8 @@ return function(s)
 						layout = wibox.layout.fixed.horizontal,
 					},
 				},
-				left = dpi(10),
-				right = dpi(10),
+				left = dpi(6),
+				right = dpi(6),
 				widget = wibox.container.margin,
 			},
 			bg = beautiful.wibar_bg,

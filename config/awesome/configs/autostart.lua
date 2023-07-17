@@ -8,7 +8,7 @@ local function autostart()
 	helpers.run.check_if_running("picom", nil, function()
 		awful.spawn("picom --experimental-backends --config " .. config_dir .. "configs/picom.conf", false)
 	end)
-	-- Dbus
+	-- Dbus (for Firefox working properly)
 	helpers.run.run_once_grep(
 		"dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY"
 	)
@@ -17,6 +17,8 @@ local function autostart()
 		"polkit-gnome-authentication-agent-1",
 		"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 	)
+	-- Inputs
+	helpers.run.run_once_grep("xset r rate 400 50")
 	--- Other stuff
 	helpers.run.run_once_grep("blueman-applet")
 	helpers.run.run_once_grep("nm-applet")
