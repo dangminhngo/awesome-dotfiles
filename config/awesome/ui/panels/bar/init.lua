@@ -10,6 +10,7 @@ local animation = require("modules.animation")
 return function(s)
 	-- Widgets
 	s.clock = require("ui.panels.bar.clock")()
+	s.ethernet = require("ui.panels.bar.ethernet")()
 
 	-- Animated taglist
 	-- Taglist buttons
@@ -227,6 +228,7 @@ return function(s)
 					tag_list(s),
 					{
 						system_tray(),
+						s.ethernet,
 						layoutbox(),
 						layout = wibox.layout.fixed.horizontal,
 					},

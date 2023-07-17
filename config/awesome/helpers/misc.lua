@@ -105,7 +105,7 @@ end
 ---Round float to nearest int
 -- @param x number Float
 -- @return number
-_misc.round = function(x)
+function _misc.round(x)
 	return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
 end
 
@@ -113,8 +113,12 @@ end
 -- @param value number
 -- @param min number
 -- @param max number
-_misc.clamp = function(value, min, max)
+function _misc.clamp(value, min, max)
 	return math.min(math.max(value, min), max)
+end
+
+function _misc.trim(s)
+	return string.gsub(s, "^%s*(.-)%s*$", "%1")
 end
 
 return _misc
