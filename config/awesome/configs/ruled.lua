@@ -56,6 +56,8 @@ ruled.client.connect_signal("request::rules", function()
 				"Devtools", --- Firefox devtools
 			},
 			class = {
+				"floatterm",
+				"calculator",
 				"Lxappearance",
 				"Nm-connection-editor",
 			},

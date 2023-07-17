@@ -9,10 +9,14 @@ local lock_screen_show = require("modules.lockscreen.lockscreen")
 
 --- Make key easier to call
 --- ~~~~~~~~~~~~~~~~~~~~~~~
-mod = "Mod4"
-alt = "Mod1"
-ctrl = "Control"
-shift = "Shift"
+local mod = "Mod4"
+local alt = "Mod1"
+local ctrl = "Control"
+local shift = "Shift"
+
+--- Get screen geometry
+local screen_width = awful.screen.focused().geometry.width
+local screen_height = awful.screen.focused().geometry.height
 
 --- Global key bindings
 --- ~~~~~~~~~~~~~~~~~~~
@@ -24,6 +28,11 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ mod }, "Return", function()
 		awful.spawn(apps.default.terminal)
 	end, { description = "open terminal", group = "app" }),
+
+	-- Floating terminal
+	awful.key({ mod, shift }, "Return", function()
+		awful.spawn(apps.default.float_terminal)
+	end, { description = "open floating terminal", group = "app" }),
 
 	--- App launcher
 	awful.key({ mod }, "d", function()
@@ -43,6 +52,11 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ mod, shift }, "w", function()
 		awful.spawn(apps.default.second_web_browser)
 	end, { description = "open second web browser", group = "app" }),
+
+	--- Calculator
+	awful.key({ mod, shift }, "z", function()
+		awful.spawn.with_shell(apps.default.calculator)
+	end, { description = "open calculator", group = "app" }),
 
 	--- WM
 	--- ~~
@@ -163,11 +177,6 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ mod, alt }, "l", function()
 		lock_screen_show()
 	end, { description = "lock screen", group = "hotkeys" }),
-
-	--- Exit screen
-	awful.key({ mod }, "Escape", function()
-		awesome.emit_signal("module::exit_screen:show")
-	end, { description = "exit screen", group = "hotkeys" }),
 })
 
 --- Client key bindings

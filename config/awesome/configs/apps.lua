@@ -7,8 +7,12 @@ return {
 	default = {
 		--- Default terminal emulator
 		terminal = "alacritty",
+		--- Default float terminal
+		float_terminal = "alacritty --class floatterm --title floatterm",
 		--- Default text editor
 		text_editor = "alacritty -e nvim",
+		--- Default calculator
+		calculator = "alacritty --class calculator --title calculator -e calc",
 		--- Default code editor
 		code_editor = "code",
 		--- Default web browser
