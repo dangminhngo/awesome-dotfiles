@@ -11,12 +11,12 @@ local lock_screen = require("modules.lockscreen")
 --- ~~~~~~~~~~~~~~~~~~~~~~
 
 local lock_screen_symbol = ""
-local lock_screen_fail_symbol = ""
+local lock_screen_fail_symbol = ""
 local lock_animation_icon = wibox.widget({
 	--- Set forced size to prevent flickering when the icon rotates
 	forced_height = dpi(80),
 	forced_width = dpi(80),
-	font = beautiful.icon_font .. "Outlined 40",
+	font = beautiful.icon_font .. " Round 40",
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox(lock_screen_symbol),
@@ -126,7 +126,7 @@ local function create_text_widget(index, w)
 	local text_widget = wibox.widget({
 		id = "t" .. index,
 		markup = w,
-		font = beautiful.font_name .. "Bold 24",
+		font = beautiful.font_name .. " Heavy 28",
 		align = "center",
 		valign = "center",
 		forced_width = dpi(36),
@@ -167,7 +167,7 @@ end
 local function activate_word(w)
 	for i, m in pairs(char_map[w]) do
 		local text = m.text
-		m.markup = helpers.ui.colorize_text(text, beautiful.white)
+		m.markup = helpers.ui.colorize_text(text, beautiful.accent)
 	end
 end
 
@@ -237,6 +237,18 @@ gears.timer({
 
 		activate_word(tostring(hh))
 	end,
+})
+
+-- User avatar
+local avatar = wibox.widget({
+	image = beautiful.avatar,
+	clip_shape = gears.shape.circle,
+	resize = true,
+	halign = "center",
+	valign = "center",
+	forced_width = 225,
+	forced_height = 225,
+	widget = wibox.widget.imagebox,
 })
 
 --- Lock animation
@@ -376,10 +388,11 @@ lock_screen_box:setup({
 		--- Vertical centering
 		nil,
 		{
-			helpers.ui.vertical_pad(dpi(20)),
+			helpers.ui.vertical_pad(dpi(16)),
 			time,
+			avatar,
 			lock_animation,
-			spacing = dpi(60),
+			spacing = dpi(32),
 			layout = wibox.layout.fixed.vertical,
 		},
 		expand = "none",

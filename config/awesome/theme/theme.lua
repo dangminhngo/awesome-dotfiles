@@ -136,6 +136,7 @@ theme.wibar_height = dpi(40)
 
 -- UI ELEMENTS
 theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/wallpaper.png")
+theme.avatar = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/avatar.png")
 
 --- Layout
 --- You can use your own layout icons like this:
