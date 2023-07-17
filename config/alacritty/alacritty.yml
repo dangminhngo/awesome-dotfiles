@@ -1,0 +1,52 @@
+#
+# ░█████╗░██╗░░░░░░█████╗░░█████╗░██████╗░██╗████████╗████████╗██╗░░░██╗
+# ██╔══██╗██║░░░░░██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝╚══██╔══╝╚██╗░██╔╝
+# ███████║██║░░░░░███████║██║░░╚═╝██████╔╝██║░░░██║░░░░░░██║░░░░╚████╔╝░
+# ██╔══██║██║░░░░░██╔══██║██║░░██╗██╔══██╗██║░░░██║░░░░░░██║░░░░░╚██╔╝░░
+# ██║░░██║███████╗██║░░██║╚█████╔╝██║░░██║██║░░░██║░░░░░░██║░░░░░░██║░░░
+# ╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░╚═╝░░░░░░╚═╝░░░
+#
+# Created by: Dang Minh Ngo
+# Github: @dangminhngo
+# Email: dangminhngo.dev@gmail.com
+
+import:
+  - ~/.config/alacritty/theme.yml
+
+window:
+  title: alacritty
+  dynamic_title: true
+  class:
+    instance: alacritty
+    general: alacritty
+  padding:
+    x: 0
+    y: 0
+
+scrolling:
+  history: 2000
+  multiplier: 3
+
+font:
+  normal:
+    family: Jetka
+    style: Regular
+  bold:
+    family: Jetka
+    style: Bold
+  italic:
+    family: Jetka
+    tyle: Regular Italic
+  bold_italic:
+    family: Jetka
+    style: Bold Italic
+  size: 14
+  offset:
+    x: 0
+    y: 2
+
+shell:
+  program: /bin/fish
+
+mouse:
+  hide_when_typing: true

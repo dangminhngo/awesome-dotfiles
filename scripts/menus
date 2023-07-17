@@ -1,0 +1,251 @@
+#!/bin/fish
+
+# --------------------------------------------------------------------------------------------------
+# COLORPICKER
+# --------------------------------------------------------------------------------------------------
+function colorpicker
+    set theme ~/.config/rofi/colorpicker.rasi
+
+    killall -q rofi
+
+    # Options
+    set hex_opt HEX
+    set rgb_opt RGB
+    set hsl_opt HSL
+
+    # Variables passed to dmenu
+    set options "$hex_opt\n$rgb_opt\n$hsl_opt"
+    set opt (echo -e "$options" | rofi -dmenu -p "hyprpicker" -theme $theme)
+
+    if test -z $opt
+        exit 0
+    end
+
+    sleep 1
+    switch $opt
+        case $hex_opt
+            set output (hyprpicker)
+            set hex (string lower $output)
+            wl-copy $hex
+            notify-send "$hex copied to your system clipboard"
+        case $rgb_opt
+            set output (hyprpicker -f rgb)
+            set values (string split ' ' $output)
+            set rgb "rgb($values[1], $values[2], $values[3])"
+            wl-copy $rgb
+            notify-send "$rgb copied to your system clipboard"
+        case $hsl_opt
+            set output (hyprpicker -f hsl)
+            set values (string split ' ' $output)
+            set hsl "hsl($values[1], $values[2], $values[3])"
+            wl-copy $hsl
+            notify-send "$hsl copied to your system clipboard"
+    end
+end
+
+# --------------------------------------------------------------------------------------------------
+# ZATHURA DOCUMENTS HISTORY
+# --------------------------------------------------------------------------------------------------
+function docs
+    set theme ~/.config/rofi/documents.rasi
+    killall -q rofi
+    set zathura_history (cat ~/.local/share/zathura/history | grep -Po "\[\K[^\]]*" | grep "/home/")
+
+    if test -z "$zathura_history"
+        set history "You have read no documents"
+    end
+
+    set opt (printf "%s\n" $zathura_history | rofi -dmenu -p "zathura" -theme $theme)
+
+    if test -z $opt
+        exit 0
+    end
+
+    zathura $opt
+    exit 0
+end
+
+# --------------------------------------------------------------------------------------------------
+# LAUNCHER
+# --------------------------------------------------------------------------------------------------
+function launcher
+    set theme ~/.config/rofi/launcher.rasi
+    killall -q rofi
+    set opt (rofi -show drun -theme $theme)
+
+    if test -z $opt
+        exit 0
+    end
+end
+
+# --------------------------------------------------------------------------------------------------
+# POWER MENU
+# --------------------------------------------------------------------------------------------------
+function powermenu
+    set theme ~/.config/rofi/powermenu.rasi
+    set uptime (uptime -p | sed -e 's/up //g')
+
+    killall -q rofi
+
+    # options
+    set suspend ""
+    set lock ""
+    set logout ""
+    set reboot ""
+    set shutdown ""
+
+    # variables passed to dmenu
+    set options "$suspend\n$lock\n$logout\n$reboot\n$shutdown"
+
+    set opt (echo -e $options | rofi -dmenu -p "Uptime: $uptime" -theme $theme -selected-row 2)
+
+    if test -z $opt
+        exit 0
+    end
+
+    switch $opt
+        case $shutdown
+            poweroff
+        case $reboot
+            reboot
+        case $logout
+            hyprctl dispatch exit 0
+        case $lock
+            ~/.dotfiles/scripts/widgets lock
+        case $suspend
+            systemctl suspend
+    end
+end
+
+# --------------------------------------------------------------------------------------------------
+# RECORDER
+# --------------------------------------------------------------------------------------------------
+function recorder
+    set bar eww --config ~/.config/eww/bar
+    set pid (pgrep wf-recorder)
+
+    # TODO: How can I stop wf-recorder normally without damaging video file.
+    if test -n "$pid"
+        notify-send "A recording instance has running. Kill it before creating new instance."
+    else
+        set theme ~/.config/rofi/recorder.rasi
+        set savepath (xdg-user-dir VIDEOS)/recordings
+        mkdir -p $savepath
+
+        killall -q rofi
+
+        # Options
+        set sound ""
+        set silent ""
+        set crop ""
+
+        # Variables passed to dmenu
+        set options "$sound\n$silent\n$crop"
+
+        set opt (echo -e $options | rofi -dmenu -p "wf-recorder" -theme $theme)
+
+        if test -z $opt
+            exit 0
+        end
+
+        switch $opt
+            case $sound
+                notify-send "Recording in Sound Mode. CTRL-C to stop."
+                $bar update rec=true
+                alacritty -e wf-recorder -a -f $savepath/(date +%Y%m%d_%H%M%S.mp4)
+                $bar update rec=false
+            case $silent
+                notify-send "Recording in Silent Mode. CTRL-C to stop."
+                $bar update rec=true
+                alacritty -e wf-recorder -f $savepath/(date +%Y%m%d_%H%M%S.mp4)
+                $bar update rec=false
+            case $crop
+                notify-send "Recording in Crop Mode. CTRL-C to stop."
+                $bar update rec=true
+                alacritty -e wf-recorder -g (slurp) -f $savepath/(date +%Y%m%d_%H%M%S.mp4)
+                $bar update rec=false
+        end
+    end
+end
+
+# --------------------------------------------------------------------------------------------------
+# SCREENSHOT
+# --------------------------------------------------------------------------------------------------
+function screenshot
+    set theme ~/.config/rofi/screenshot.rasi
+    set savepath (xdg-user-dir PICTURES)/screenshots
+    mkdir -p $savepath
+
+    killall -q rofi
+
+    # Options
+    set normal ""
+    set crop ""
+
+    # Variables passed to dmenu
+    set options "$normal\n$crop"
+
+    set opt (echo -e $options | rofi -dmenu -p "grim" -theme $theme)
+
+    if test -z $opt
+        exit 0
+    end
+
+    switch $opt
+        case $normal
+            grim $savepath/(date +%Y%m%d_%H%M%S.png)
+            notify-send "Screenshot All Monitor saved $savepath"
+        case $crop
+            grim -g (slurp) $savepath/(date +%Y%m%d_%H%M%S.png)
+            notify-send "Screenshot Crop Region saved $savepath"
+    end
+end
+
+# --------------------------------------------------------------------------------------------------
+# WINDOW PICKER
+# --------------------------------------------------------------------------------------------------
+function windowpicker
+    set theme ~/.config/rofi/windows.rasi
+
+    killall -q rofi
+
+    set windows (string trim -l (string replace "title: " "" (hyprctl clients | grep title)))
+    set pids (string trim -l (string replace "pid: " "" (hyprctl clients | grep pid)))
+
+    for i in (seq (count $windows))
+        set pid_windows[$i] "$pids[$i]  $windows[$i]"
+    end
+
+    if test (count $pid_windows) -eq 0
+        exit 0
+    end
+
+    set options (string join "\n" $pid_windows)
+
+    set opt (echo -e $options | rofi -dmenu -p "Windows" -theme $theme)
+
+    if test -z $opt
+        exit 0
+    end
+
+    set focus_pid (string split "  " $opt)[1]
+    hyprctl dispatch focuswindow pid:$focus_pid
+    exit 0
+end
+
+switch $argv[1]
+    case colorpicker
+        colorpicker
+    case docs
+        docs
+    case launcher
+        launcher
+    case powermenu
+        powermenu
+    case recorder
+        recorder
+    case screenshot
+        screenshot
+    case windowpicker
+        windowpicker
+end

@@ -1,0 +1,15 @@
+/*
+ * ▄▄▄        ·▄▄▄▪  
+ * ▀▄ █·▪     ▐▄▄·██ 
+ * ▐▀▀▄  ▄█▀▄ ██▪ ▐█·
+ * ▐█•█▌▐█▌.▐▌██▌.▐█▌
+ * .▀  ▀ ▀█▄▀▪▀▀▀ ▀▀▀
+ * Created by: Dang Minh Ngo
+ * Github: @dangminhngo
+ * Email: dangminhngo.dev@gmail.com
+ */
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "Papirus-Dark";
+}

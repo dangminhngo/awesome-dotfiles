@@ -1,0 +1,5 @@
+[user]
+	email = dangminhngo.dev@gmail.com
+	name = dangminhngo
+[core]
+	editor = nvim

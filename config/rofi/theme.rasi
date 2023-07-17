@@ -1,0 +1,29 @@
+/* Proxima colorscheme for Rofi */
+/* ~/.config/rofi/theme.rasi */
+
+* {
+  none:     #00000000;
+  accent:   #a4c76f;
+  dark:     #090E10;
+  bg0:      #0E161A;
+  bg:       #10181d;
+  bg2:      #18232B;
+  bg3:      #1D2C35;
+  bg4:      #243642;
+  fg0:      #DBE5EB;
+  fg:       #abc2d0;
+  fg2:      #83A4B9;
+  fg3:      #5C88A3;
+  black:    #2D4452;
+  red:      #f15a5d;
+  orange:   #e39d5f;
+  yellow:   #eace60;
+  green:    #a4c76f;
+  teal:     #72c2b2;
+  cyan:     #42b8e6;
+  blue:     #619af5;
+  magenta:  #9d78d1;
+  pink:     #d983d7;
+  white:    #E2EAEE;
+  gray:     #45677D;
+}

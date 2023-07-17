@@ -1,0 +1,27 @@
+# ▪  • ▌ ▄ ·.  ▌ ▐·
+# ██ ·██ ▐███▪▪█·█▌
+# ▐█·▐█ ▌▐▌▐█·▐█▐█•
+# ▐█▌██ ██▌▐█▌ ███ 
+# ▀▀▀▀▀ █▪▀▀▀. ▀  
+# Created by: Dang Minh Ngo
+# Github: @dangminhngo
+# Email: dangminhngo.dev@gmail.com
+
+# Proxima for imv
+# ~/.config/imv/config
+
+# styling
+[options]
+background = #10181d
+fullscreen = false
+overlay = true
+overlay_text_color = #E2EAEE
+overlay_background_color = #18232B
+overlay_background_alpha = ff
+overlay_font = Jetka:11
+overlay_position_bottom = false
+
+# bindings
+[binds]
+j = next
+k = prev

@@ -1,0 +1,18 @@
+/config/*
+!/config/alacritty
+!/config/btop
+/config/btop/btop.log
+!/config/fish
+/config/fish/completions
+/config/fish/fish_variables
+!/config/fontconfig
+!/config/gtk-3.0
+!/config/gtk-4.0
+!/config/imv
+!/config/rofi
+!/config/sddm-sugarcandy
+!/config/zathura
+!/config/starship.toml
+
+# All logs
+*.log

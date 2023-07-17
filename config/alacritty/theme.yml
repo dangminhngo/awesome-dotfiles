@@ -1,0 +1,55 @@
+# Proxima for Alacritty
+# ~/.config/alacritty/theme.yml
+colors:
+  primary:
+    background: '#0E161A'
+    foreground: '#abc2d0'
+    dim_foreground: '#5C88A3'
+    bright_foreground: '#DBE5EB'
+  cursor:
+    text: '#10181d'
+    cursor: '#DBE5EB'
+  vi_mode_cursor:
+    text: '#10181d'
+    cursor: '#DBE5EB'
+  search:
+    matches:
+      foreground: '#1D2C35'
+      background: '#9d78d1'
+    focused_match:
+      foreground: '#9d78d1'
+      background: '#1D2C35'
+  hints:
+    start:
+      foreground: '#1D2C35'
+      background: '#eace60'
+    end:
+      foreground: '#eace60'
+      background: '#1D2C35'
+  line_indicator:
+    foreground: None
+    background: None
+  footer_bar:
+    foreground: '#1D2C35'
+    background: '#9d78d1'
+  selection:
+    text: '#abc2d0'
+    background: '#243642'
+  normal:
+    black: '#2D4452'
+    red: '#f15a5d'
+    green: '#a4c76f'
+    yellow: '#eace60'
+    blue: '#619af5'
+    magenta: '#9d78d1'
+    cyan: '#42b8e6'
+    white: '#abc2d0'
+  bright:
+    black: '#2D4452'
+    red: '#f15a5d'
+    green: '#a4c76f'
+    yellow: '#eace60'
+    blue: '#619af5'
+    magenta: '#9d78d1'
+    cyan: '#42b8e6'
+    white: '#abc2d0'
