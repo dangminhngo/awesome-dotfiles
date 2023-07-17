@@ -15,9 +15,11 @@ return {
 		calculator = "alacritty --class calculator --title calculator -e calc",
 		--- Default code editor
 		code_editor = "code",
-		--- Default web browser
+		--- Default web browsers
 		web_browser = "firefox-developer-edition",
 		second_web_browser = "chromium",
+		-- Default sound control
+		sound_control = "pavucontrol",
 		--- Default file manager
 		file_manager = "alacritty -e lf",
 		--- Default network manager

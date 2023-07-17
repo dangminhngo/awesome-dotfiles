@@ -5,7 +5,7 @@
 
 local gtable = require("gears.table")
 local twidget = require("ui.widgets.text")
-local ewidget = require("ui.widgets.button.elevated")
+local ebutton = require("ui.widgets.button.elevated")
 local beautiful = require("beautiful")
 local animation = require("modules.animation")
 local helpers = require("helpers")
@@ -47,7 +47,7 @@ local function button(args, type)
 	local text_widget = twidget(args)
 
 	args.child = text_widget
-	local widget = type == "normal" and ewidget.normal(args) or ewidget.state(args)
+	local widget = type == "normal" and ebutton.normal(args) or ebutton.state(args)
 
 	gtable.crush(widget, text_button, true)
 	widget._private.text = text_widget
@@ -160,7 +160,7 @@ function text_button.normal(args)
 	function text_widget:on_press()
 		effect(widget, args.text_press_bg)
 		if args.animate_size == true then
-			widget.size_animation:set(math.max(12, args.size - 20))
+			widget.size_animation:set(math.max(16, args.size - 20))
 		end
 	end
 

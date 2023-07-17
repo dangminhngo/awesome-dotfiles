@@ -199,7 +199,7 @@ theme.layoutlist_bg_selected = theme.widget_bg
 theme.useless_gap = dpi(6)
 
 --- Systray
-theme.systray_icon_size = dpi(20)
+theme.systray_icon_size = dpi(24)
 theme.systray_icon_spacing = dpi(10)
 theme.bg_systray = theme.wibar_bg
 --- theme.systray_max_rows = 2
