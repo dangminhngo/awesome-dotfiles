@@ -24,7 +24,7 @@ local lock_animation_icon = wibox.widget({
 
 local some_textbox = wibox.widget.textbox()
 
-lock_screen_box = wibox({ visible = false, ontop = true, type = "splash", screen = screen.primary })
+local lock_screen_box = wibox({ visible = false, ontop = true, type = "splash", screen = screen.primary })
 awful.placement.maximize(lock_screen_box)
 
 lock_screen_box.bg = beautiful.transparent
@@ -105,8 +105,8 @@ local char_map = {
 
 local reset_map = { 4, 12, 14, 23, 29, 34, 39, 43, 45, 52, 56, 59, 62, 67, 71, 75, 78, 83, 89, 94, 100, 105 }
 
-function split_str(s, delimiter)
-	result = {}
+local function split_str(s, delimiter)
+	local result = {}
 	for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
 		table.insert(result, match)
 	end

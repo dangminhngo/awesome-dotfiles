@@ -236,6 +236,4 @@ theme.dont_swallow_classname_list = {
 	"Thunar",
 }
 
-gears.debug.dump(theme)
-
 return theme
