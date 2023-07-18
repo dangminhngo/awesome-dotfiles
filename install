@@ -49,9 +49,11 @@ paru -S --noconfirm --needed \
     git \
     go \
     golangci-lint \
+    gpick \
     gtk-layer-shell \
     gtk3 \
     gtk4 \
+    imagemagick \
     imv \
     jq \
     lazygit \
@@ -67,7 +69,7 @@ paru -S --noconfirm --needed \
     python-pip \
     ripgrep \
     redshift-minimal \
-    rofi-lbonn-wayland-git \
+    rofi \
     rsync \
     rustup \
     socat \
