@@ -1,0 +1,169 @@
+#!/bin/fish
+
+# Install basic packages
+sudo pacman -S --noconfirm --needed base-devel git fish rustup
+
+# Install rustup toolchain
+echo "Installing rustup with its stable toolchain ..."
+rustup install stable
+rustup default stable
+
+sleep 1
+
+# Install Paru
+if which paru
+else
+    echo "Installing paru ..."
+    git clone https://aur.archlinux.org/paru.git
+    pushd paru
+    makepkg -si --noconfirm
+    popd
+    rm -rf paru
+end
+
+sleep 1
+
+echo "Refreshing repositories ..."
+paru -Syy --noconfirm
+paru -Sy --noconfirm archlinux-keyring
+
+sleep 1
+
+echo "Installing necessary packages ..."
+paru -S --noconfirm --needed \
+    alacritty \
+    awesome-git \
+    base-devel \
+    btop \
+    breeze-snow-cursor-theme \
+    calc \
+    clang \
+    curl \
+    chromium \
+    docker \
+    docker-compose \
+    docker-machine \
+    fd \
+    firefox-developer-edition \
+    fish \
+    git \
+    go \
+    golangci-lint \
+    gtk-layer-shell \
+    gtk3 \
+    gtk4 \
+    imv \
+    jq \
+    lazygit \
+    lf \
+    luacheck \
+    man \
+    neovim \
+    net-tools \
+    pamixer \
+    papirus-icon-theme \
+    pdfjs \
+    polkit-kde-agent \
+    python-pip \
+    ripgrep \
+    redshift-minimal \
+    rofi-lbonn-wayland-git \
+    rsync \
+    rustup \
+    socat \
+    starship \
+    stylua \
+    tree \
+    ttf-roboto \
+    unzip \
+    xdg-desktop-portal \
+    xdg-utils \
+    xdg-user-dirs \
+    vscode \
+    wireplumber \
+    xautolock \
+    xclip \
+    xorg \
+    xorg-xlsclients \
+    zathura \
+    zathura-pdf-poppler
+
+sleep 1
+
+# Enable systemd services
+echo "Enabling services..."
+sudo systemctl enable sddm.service
+
+sleep 1
+
+# SDDM
+echo "Configuring SDDM and installing Sugar Candy from github source..."
+sudo git clone https://github.com/Kangie/sddm-sugar-candy.git /usr/share/sddm/themes/sugar-candy
+paru -S qt5-graphicaleffects qt5-quickcontrols2 qt5-svg
+sudo rsync --recursive ./system/sddm.conf.d /etc/
+sudo rsync ./config/sddm-sugarcandy/theme.conf /usr/share/sddm/themes/sugar-candy/
+sudo rsync ./wallpapers/greeting.jpg /usr/share/sddm/themes/sugar-candy/
+
+echo "Creating default user directories..."
+xdg-user-dirs-update
+
+sleep 1
+
+# Fonts
+echo "Downloading & copying fonts to directories..."
+rm -rf ~/.local/share/{themes,fonts}
+mkdir -p ~/.local/share/{themes,fonts}
+git clone https://github.com/dangminhngo/fonts.git
+sudo rsync fonts/Jetka/patched/* ~/.local/share/fonts/
+rsync fonts/Others/* ~/.local/share/fonts/
+rm -rf fonts
+fc-cache -r
+
+# Run Docker with current user privileges
+echo "Running docker post installation..."
+sudo usermod -aG docker $USER
+
+sleep 1
+
+echo "Copying configurations..."
+# Copy common configs
+rm -rf ~/.config
+ln -s ~/.dotfiles/config ~/.config
+# Copy common system configs
+sudo rsync ./system/xorg.conf.d/* /etc/X11/xorg.conf.d/
+rsync ./system/.gitconfig ~/
+sudo rsync --recursive ./system/reflector /etc/xdg/
+rsync --recursive ./system/.icons ~/
+
+# Remove default cursor theme
+sudo rm -rf /usr/share/icons/default
+
+sleep 1
+
+# Install GTK themes
+echo "Installing GTK themes..."
+git clone https://github.com/dangminhngo/gtktheme-generator.git
+cp -R gtktheme-generator/themes/Proxima ~/.local/share/themes/
+rm -rf gtktheme-generator
+
+sleep 1
+
+# Install NodeJS
+echo "Installing Node.js..."
+curl -fsSL https://fnm.vercel.app/install | bash
+fnm install v18
+
+sleep 1
+# Install PNPM
+echo "Installing pnpm..."
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+sleep 1
+
+# Clean up
+echo "Cleaning up..."
+paru -Rns (paru -Qdtq)
+
+sleep 1
+
+echo "Reboot to your system and Happy coding!"

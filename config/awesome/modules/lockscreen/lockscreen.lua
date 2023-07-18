@@ -27,7 +27,7 @@ local some_textbox = wibox.widget.textbox()
 local lock_screen_box = wibox({ visible = false, ontop = true, type = "splash", screen = screen.primary })
 awful.placement.maximize(lock_screen_box)
 
-lock_screen_box.bg = beautiful.transparent
+lock_screen_box.bg = beautiful.bg .. "99"
 lock_screen_box.fg = beautiful.white
 
 --- Add lockscreen to each screen
@@ -126,11 +126,11 @@ local function create_text_widget(index, w)
 	local text_widget = wibox.widget({
 		id = "t" .. index,
 		markup = w,
-		font = beautiful.font_name .. " Heavy 28",
+		font = beautiful.font_name .. " Heavy 32",
 		align = "center",
 		valign = "center",
-		forced_width = dpi(36),
-		forced_height = dpi(36),
+		forced_width = dpi(48),
+		forced_height = dpi(48),
 		widget = wibox.widget.textbox,
 	})
 
@@ -141,7 +141,7 @@ end
 
 local var_count = 0
 for i, m in pairs(time_char) do
-	local text = helpers.ui.colorize_text(m, "#ffffff" .. "10")
+	local text = helpers.ui.colorize_text(m, "#ffffff" .. "05")
 
 	var_count = var_count + 1
 	local create_dummy_text = true
@@ -174,7 +174,7 @@ end
 local function deactivate_word(w)
 	for i, m in pairs(char_map[w]) do
 		local text = m.text
-		m.markup = helpers.ui.colorize_text(text, "#ffffff" .. "10")
+		m.markup = helpers.ui.colorize_text(text, "#ffffff" .. "05")
 	end
 end
 

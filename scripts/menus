@@ -15,7 +15,7 @@ function colorpicker
 
     # Variables passed to dmenu
     set options "$hex_opt\n$rgb_opt\n$hsl_opt"
-    set opt (echo -e "$options" | rofi -dmenu -p "hyprpicker" -theme $theme)
+    set opt (echo -e "$options" | rofi -x11 -dmenu -p "hyprpicker" -theme $theme)
 
     if test -z $opt
         exit 0
