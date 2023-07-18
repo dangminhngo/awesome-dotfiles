@@ -1,3 +1,14 @@
 #!/bin/fish
 
+if test -z (command -v gpick)
+    awesome-client "
+    local naughty = require('naughty')
+    naughty.notification({
+      title = 'Missing dependency: gpick',
+      app_name = 'Color Picker',
+    })
+  "
+    exit 1
+end
+
 awesome-client "require('utils.xcolor').pick('$argv[1]')"
