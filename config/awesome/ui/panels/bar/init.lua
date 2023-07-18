@@ -12,6 +12,7 @@ return function(s)
 	s.clock = require("ui.panels.bar.clock")()
 	s.ethernet = require("ui.panels.bar.ethernet")()
 	s.volume = require("ui.panels.bar.volume")()
+	s.nightlight = require("ui.panels.bar.nightlight")()
 	s.stats = require("ui.panels.bar.stats")()
 
 	-- Animated taglist
@@ -233,6 +234,7 @@ return function(s)
 					{
 						system_tray(),
 						s.volume,
+						s.nightlight,
 						s.ethernet,
 						layoutbox(),
 						layout = wibox.layout.fixed.horizontal,
