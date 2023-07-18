@@ -18,8 +18,7 @@ function _ui.add_tooltip(obj, text)
 end
 
 function _ui.colorize_text(text, color)
-	color = color or beautiful.fg
-	return "<span foreground='" .. color .. "'>" .. text .. "</span>"
+	return "<span foreground='" .. (color or beautiful.fg) .. "'>" .. text .. "</span>"
 end
 
 function _ui.add_hover_cursor(w, hover_cursor)
