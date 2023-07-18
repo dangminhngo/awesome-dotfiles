@@ -228,6 +228,7 @@ return function(s)
 					{
 						s.clock,
 						s.stats,
+						spacing = dpi(12),
 						layout = wibox.layout.fixed.horizontal,
 					},
 					tag_list(s),
