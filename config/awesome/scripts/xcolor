@@ -1,0 +1,3 @@
+#!/bin/fish
+
+awesome-client "require('utils.xcolor').pick('$argv[1]')"

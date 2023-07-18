@@ -55,8 +55,8 @@ naughty.connect_signal("request::display", function(n)
 		["firefox"] = { icon = "" },
 		["discord"] = { icon = "" },
 		["music"] = { icon = "" },
-		["screenshot tool"] = { icon = "" },
-		["color picker"] = { icon = "" },
+		["Screenshot"] = { icon = "" },
+		["Color Picker"] = { icon = "" },
 	}
 
 	local app_icon = nil
@@ -100,8 +100,8 @@ naughty.connect_signal("request::display", function(n)
 				widget = wibox.container.background,
 			},
 			strategy = "exact",
-			height = dpi(50),
-			width = dpi(50),
+			height = dpi(36),
+			width = dpi(36),
 			widget = wibox.container.constraint,
 		},
 		{
@@ -127,7 +127,7 @@ naughty.connect_signal("request::display", function(n)
 	})
 
 	local dismiss = widgets.button.text.normal({
-		font = beautiful.icon_font .. "Round ",
+		font = beautiful.icon_font .. " Round ",
 		paddings = dpi(2),
 		size = 8,
 		bold = true,
@@ -174,7 +174,6 @@ naughty.connect_signal("request::display", function(n)
 		widgets.text({
 			font = beautiful.font_name,
 			size = 11,
-			bold = true,
 			text = n.title,
 		}),
 	})
@@ -331,3 +330,7 @@ naughty.connect_signal("request::display", function(n)
 		naughty.destroy_all_notifications(nil, 1)
 	end
 end)
+
+-- naughty.notification({
+-- 	title = "This is title",
+-- })

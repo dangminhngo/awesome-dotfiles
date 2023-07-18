@@ -55,7 +55,7 @@ function docs
         set history "You have read no documents"
     end
 
-    set opt (printf "%s\n" $zathura_history | rofi -dmenu -p "zathura" -theme $theme)
+    set opt (printf "%s\n" $zathura_history | rofi -x11 -dmenu -p "zathura" -theme $theme)
 
     if test -z $opt
         exit 0
@@ -97,7 +97,7 @@ function powermenu
     # variables passed to dmenu
     set options "$suspend\n$lock\n$logout\n$reboot\n$shutdown"
 
-    set opt (echo -e $options | rofi -dmenu -p "Uptime: $uptime" -theme $theme -selected-row 2)
+    set opt (echo -e $options | rofi -x11 -dmenu -p "Uptime: $uptime" -theme $theme -selected-row 2)
 
     if test -z $opt
         exit 0
@@ -142,7 +142,7 @@ function recorder
         # Variables passed to dmenu
         set options "$sound\n$silent\n$crop"
 
-        set opt (echo -e $options | rofi -dmenu -p "wf-recorder" -theme $theme)
+        set opt (echo -e $options | rofi -x11 -dmenu -p "wf-recorder" -theme $theme)
 
         if test -z $opt
             exit 0
@@ -185,7 +185,7 @@ function screenshot
     # Variables passed to dmenu
     set options "$normal\n$crop"
 
-    set opt (echo -e $options | rofi -dmenu -p "grim" -theme $theme)
+    set opt (echo -e $options | rofi -x11 -dmenu -p "grim" -theme $theme)
 
     if test -z $opt
         exit 0
@@ -222,7 +222,7 @@ function windowpicker
 
     set options (string join "\n" $pid_windows)
 
-    set opt (echo -e $options | rofi -dmenu -p "Windows" -theme $theme)
+    set opt (echo -e $options | rofi -x11 -dmenu -p "Windows" -theme $theme)
 
     if test -z $opt
         exit 0

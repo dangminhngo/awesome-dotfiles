@@ -11,7 +11,9 @@ local function autostart()
 	--- Polkit Agent
 	helpers.run.run_once_ps("polkit-kde-authentication-agent-1", "/usr/lib/polkit-kde-authentication-agent-1")
 	-- Screen
-	helpers.run.run_once_grep("xset s off && xset s noblank && xset -dpms")
+	helpers.run.run_once_grep("xset s off")
+	helpers.run.run_once_grep("xset s noblank")
+	helpers.run.run_once_grep("xset -dpms")
 	-- Inputs
 	helpers.run.run_once_grep("xset r rate 400 50")
 	--- Other stuff
@@ -19,7 +21,7 @@ local function autostart()
 	helpers.run.run_once_grep("nm-applet")
 	-- Idle manager
 	helpers.run.run_once_grep(
-		[[xautolock -time 10 -locker awesome-client "require('modules.lockscreen.lockscreen')()" -killtime 15 -killer xset dpms force off]]
+		[[xautolock -time 10 -locker 'awesome-client "require('modules.lockscreen.lockscreen')()"' -killtime 15 -killer 'xset dpms force off']]
 	)
 end
 
