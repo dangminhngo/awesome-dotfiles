@@ -1,6 +1,6 @@
 local gfs = require("gears.filesystem")
 local config_dir = gfs.get_configuration_dir()
-local utils_dir = config_dir .. "utils/"
+local scripts_dir = config_dir .. "scripts/"
 
 return {
 	--- Default Applications
@@ -35,10 +35,10 @@ return {
 	--- List of binaries/shell scripts that will execute for a certain task
 	utils = {
 		--- Fullscreen screenshot
-		full_screenshot = utils_dir .. "screensht full",
+		full_screenshot = scripts_dir .. "screensht full",
 		--- Area screenshot
-		area_screenshot = utils_dir .. "screensht area",
+		area_screenshot = scripts_dir .. "screensht area",
 		--- Color Picker
-		color_picker = utils_dir .. "xcolor-pick",
+		color_picker = scripts_dir .. "menu colorpicker",
 	},
 }

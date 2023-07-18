@@ -9,38 +9,19 @@ function colorpicker
     killall -q rofi
 
     # Options
-    set hex_opt HEX
-    set rgb_opt RGB
-    set hsl_opt HSL
+    set hex_opt hex
+    set rgb_opt rgb
+    set hsl_opt hsl
 
     # Variables passed to dmenu
     set options "$hex_opt\n$rgb_opt\n$hsl_opt"
-    set opt (echo -e "$options" | rofi -x11 -dmenu -p "hyprpicker" -theme $theme)
+    set opt (echo -e "$options" | rofi -x11 -dmenu -p "xcolor" -theme $theme)
 
     if test -z $opt
         exit 0
     end
 
-    sleep 1
-    switch $opt
-        case $hex_opt
-            set output (hyprpicker)
-            set hex (string lower $output)
-            wl-copy $hex
-            notify-send "$hex copied to your system clipboard"
-        case $rgb_opt
-            set output (hyprpicker -f rgb)
-            set values (string split ' ' $output)
-            set rgb "rgb($values[1], $values[2], $values[3])"
-            wl-copy $rgb
-            notify-send "$rgb copied to your system clipboard"
-        case $hsl_opt
-            set output (hyprpicker -f hsl)
-            set values (string split ' ' $output)
-            set hsl "hsl($values[1], $values[2], $values[3])"
-            wl-copy $hsl
-            notify-send "$hsl copied to your system clipboard"
-    end
+    ~/.config/awesome/scripts/xcolor $opt
 end
 
 # --------------------------------------------------------------------------------------------------
