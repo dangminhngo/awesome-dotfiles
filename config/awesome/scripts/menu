@@ -90,9 +90,9 @@ function powermenu
         case $reboot
             reboot
         case $logout
-            hyprctl dispatch exit 0
+            awesome-client "awesome.quit"
         case $lock
-            ~/.dotfiles/scripts/widgets lock
+            awesome-client "require('modules.lockscreen.lockscreen')()"
         case $suspend
             systemctl suspend
     end
@@ -153,32 +153,31 @@ end
 # SCREENSHOT
 # --------------------------------------------------------------------------------------------------
 function screenshot
+    set sct ~/.config/awesome/scripts/screensht
     set theme ~/.config/rofi/screenshot.rasi
-    set savepath (xdg-user-dir PICTURES)/screenshots
-    mkdir -p $savepath
-
     killall -q rofi
 
     # Options
-    set normal ""
-    set crop ""
+    set full ""
+    set area ""
+    set focused ""
 
     # Variables passed to dmenu
-    set options "$normal\n$crop"
+    set options "$full\n$area\n$focused"
 
-    set opt (echo -e $options | rofi -dmenu -p "grim" -theme $theme)
+    set opt (echo -e $options | rofi -dmenu -p "scrot" -theme $theme)
 
     if test -z $opt
         exit 0
     end
 
     switch $opt
-        case $normal
-            grim $savepath/(date +%Y%m%d_%H%M%S.png)
-            notify-send "Screenshot All Monitor saved $savepath"
-        case $crop
-            grim -g (slurp) $savepath/(date +%Y%m%d_%H%M%S.png)
-            notify-send "Screenshot Crop Region saved $savepath"
+        case $full
+            $sct full
+        case $area
+            $sct area
+        case $focused
+            $sct focused
     end
 end
 

@@ -166,12 +166,8 @@ awful.keyboard.append_global_keybindings({
 
 	--- Screenshots
 	awful.key({}, "Print", function()
-		awful.spawn.easy_async_with_shell(apps.utils.full_screenshot, function() end)
-	end, { description = "take a full screenshot", group = "hotkeys" }),
-
-	awful.key({ alt }, "Print", function()
-		awful.spawn.easy_async_with_shell(apps.utils.area_screenshot, function() end)
-	end, { description = "take a area screenshot", group = "hotkeys" }),
+		awful.spawn.easy_async_with_shell(apps.utils.screenshot, function() end)
+	end, { description = "take a screenshot", group = "hotkeys" }),
 
 	--- Lockscreen
 	awful.key({ mod, alt }, "l", function()

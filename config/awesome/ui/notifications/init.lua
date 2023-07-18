@@ -173,6 +173,7 @@ naughty.connect_signal("request::display", function(n)
 		speed = 75,
 		widgets.text({
 			font = beautiful.font_name,
+			bold = true,
 			size = 11,
 			text = n.title,
 		}),

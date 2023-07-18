@@ -34,10 +34,8 @@ return {
 
 	--- List of binaries/shell scripts that will execute for a certain task
 	utils = {
-		--- Fullscreen screenshot
-		full_screenshot = scripts_dir .. "screensht full",
-		--- Area screenshot
-		area_screenshot = scripts_dir .. "screensht area",
+		--- Screenshot
+		screenshot = scripts_dir .. "menu screenshot",
 		--- Color Picker
 		color_picker = scripts_dir .. "menu colorpicker",
 	},
