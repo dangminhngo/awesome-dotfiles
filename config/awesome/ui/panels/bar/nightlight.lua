@@ -11,22 +11,24 @@ return function()
 		font = beautiful.icon_font .. " Round ",
 		size = 16,
 		text = "",
-		on_release = function(self)
-			local tooltip = helpers.ui.add_tooltip(self, "Nightlight: Off")
-			awful.spawn.easy_async_with_shell([[~/.dotfiles/scripts/utils nightlight]], function(stdout)
-				local state = helpers.misc.trim(stdout)
-				if state == "on" then
-					self:set_text("")
-					self:set_color(beautiful.fg)
-					tooltip:set_text("Nightlight: On")
-				else
-					self:set_text("")
-					self:set_color(beautiful.black)
-					tooltip:set_text("Nightlight: Off")
-				end
-			end)
-		end,
 	})
+
+	local tooltip = helpers.ui.add_tooltip(nightlight, "Nightlight: Off")
+
+	nightlight:connect_signal("button::release", function()
+		awful.spawn.easy_async_with_shell([[~/.dotfiles/scripts/utils nightlight]], function(stdout)
+			local state = helpers.misc.trim(stdout)
+			if state == "on" then
+				nightlight:set_text("")
+				nightlight:set_color(beautiful.fg)
+				tooltip:set_text("Nightlight: On")
+			else
+				nightlight:set_text("")
+				nightlight:set_color(beautiful.black)
+				tooltip:set_text("Nightlight: Off")
+			end
+		end)
+	end)
 
 	return nightlight
 end
