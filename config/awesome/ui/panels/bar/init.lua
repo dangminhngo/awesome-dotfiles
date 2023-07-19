@@ -161,13 +161,16 @@ return function(s)
 			font = beautiful.icon_font .. " Round ",
 			size = 18,
 			text = "",
+			tooltip = "Open Systray",
 			on_turn_on = function(self)
 				system_tray_animation:set(400)
 				self:set_text("")
+				self:set_tooltip_text("Close Systray")
 			end,
 			on_turn_off = function(self)
 				system_tray_animation:set(0)
 				self:set_text("")
+				self:set_tooltip_text("Open Systray")
 			end,
 		})
 
