@@ -36,7 +36,7 @@ awful.keyboard.append_global_keybindings({
 
 	--- App launcher
 	awful.key({ mod }, "d", function()
-		awful.spawn.with_shell(apps.default.app_launcher)
+		awful.spawn.with_shell(apps.default.launcher)
 	end, { description = "open app launcher", group = "app" }),
 
 	awful.key({ mod, shift }, "e", function()

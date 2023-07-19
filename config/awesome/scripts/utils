@@ -35,7 +35,24 @@ function idle-on
     end
 end
 
+function xcolor
+    if test -z (command -v gpick)
+        awesome-client "
+          local naughty = require('naughty')
+          naughty.notification({
+            title = 'Missing dependency: gpick',
+            app_name = 'Color Picker',
+          })
+        "
+        exit 1
+    end
+
+    awesome-client "require('utils.xcolor').pick('$argv[1]')"
+end
+
 switch $argv[1]
+    case xcolor
+        xcolor $argv[2]
     case nightlight
         switch $argv[2]
             case on

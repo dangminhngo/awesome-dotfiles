@@ -29,7 +29,7 @@ return {
 		--- Default power manager
 		power_manager = "xfce4-power-manager",
 		--- Default rofi global menu
-		app_launcher = "~/.dotfiles/scripts/menus launcher",
+		launcher = scripts_dir .. "menu launcher",
 	},
 
 	--- List of binaries/shell scripts that will execute for a certain task

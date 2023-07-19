@@ -139,15 +139,13 @@ theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "th
 theme.avatar = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/avatar.png")
 
 --- Layout
+theme.master_width_factor = 0.6
 --- You can use your own layout icons like this:
 theme.layout_floating = icons.floating
 theme.layout_max = icons.max
 theme.layout_tile = icons.tile
 theme.layout_dwindle = icons.dwindle
 theme.layout_centered = icons.centered
-theme.layout_mstab = icons.mstab
-theme.layout_equalarea = icons.equalarea
-theme.layout_machi = icons.machi
 
 --- Icon Theme
 --- Define the icon theme for application icons. If not set then the icons
@@ -203,22 +201,6 @@ theme.systray_icon_size = dpi(24)
 theme.systray_icon_spacing = dpi(10)
 theme.bg_systray = theme.wibar_bg
 --- theme.systray_max_rows = 2
-
---- Tabs
-theme.mstab_bar_height = dpi(60)
-theme.mstab_bar_padding = dpi(0)
-theme.mstab_border_radius = dpi(6)
-theme.mstab_bar_disable = true
-theme.tabbar_disable = true
-theme.tabbar_style = "modern"
-theme.tabbar_bg_focus = theme.black
-theme.tabbar_bg_normal = theme.color0
-theme.tabbar_fg_focus = theme.color0
-theme.tabbar_fg_normal = theme.color15
-theme.tabbar_position = "bottom"
-theme.tabbar_AA_radius = 0
-theme.tabbar_size = 0
-theme.mstab_bar_ontop = true
 
 --- Notifications
 theme.notification_spacing = dpi(4)

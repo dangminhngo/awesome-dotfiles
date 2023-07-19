@@ -21,7 +21,7 @@ function colorpicker
         exit 0
     end
 
-    ~/.config/awesome/scripts/xcolor $opt
+    ~/.config/awesome/scripts/utils xcolor $opt
 end
 
 # --------------------------------------------------------------------------------------------------
