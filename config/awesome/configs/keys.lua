@@ -58,6 +58,11 @@ awful.keyboard.append_global_keybindings({
 		awful.spawn.with_shell(apps.default.calculator)
 	end, { description = "open calculator", group = "app" }),
 
+	-- Exit Menu
+	awful.key({ mod, shift }, "q", function()
+		awful.spawn.with_shell(apps.utils.exit)
+	end, { description = "exit", group = "app" }),
+
 	--- WM
 	--- ~~
 	--- Restart awesome

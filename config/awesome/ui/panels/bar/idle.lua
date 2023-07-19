@@ -3,28 +3,28 @@ local beautiful = require("beautiful")
 local widgets = require("ui.widgets")
 local apps = require("configs.apps")
 
--- Nightlight Widget
+-- Idle Widget
 return function()
-	local nightlight = widgets.button.text.state({
+	local idle = widgets.button.text.state({
 		text_normal_bg = beautiful.black,
 		text_on_normal_bg = beautiful.fg,
 		normal_bg = beautiful.wibar_bg,
 		font = beautiful.icon_font .. " Round ",
 		size = 16,
-		text = "",
-		tooltip = "Nightlight: OFF",
+		text = "",
+		tooltip = "Idle Inhibit: OFF",
 		on_by_default = false,
 		on_turn_on = function(self)
-			awful.spawn.with_shell(apps.utils.nightlight .. " on")
-			self:set_text("")
-			self:set_tooltip_text("Nightlight: ON")
+			awful.spawn.with_shell(apps.utils.idle .. " off")
+			self:set_text("")
+			self:set_tooltip_text("Idle Inhibit: ON")
 		end,
 		on_turn_off = function(self)
-			awful.spawn.with_shell(apps.utils.nightlight .. " off")
-			self:set_text("")
-			self:set_tooltip_text("Nightlight: OFF")
+			awful.spawn.with_shell(apps.utils.idle .. " on")
+			self:set_text("")
+			self:set_tooltip_text("Idle Inhibit: OFF")
 		end,
 	})
 
-	return nightlight
+	return idle
 end

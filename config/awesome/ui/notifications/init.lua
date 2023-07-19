@@ -121,7 +121,7 @@ naughty.connect_signal("request::display", function(n)
 	})
 
 	local app_name = widgets.text({
-		size = 12,
+		size = 11,
 		bold = true,
 		text = n.app_name:gsub("^%l", string.upper),
 	})
@@ -131,7 +131,7 @@ naughty.connect_signal("request::display", function(n)
 		paddings = dpi(2),
 		size = 8,
 		bold = true,
-		text = "",
+		text = "",
 		text_normal_bg = beautiful.accent,
 		animate_size = false,
 		on_release = function()
@@ -229,8 +229,9 @@ naughty.connect_signal("request::display", function(n)
 		cursor = "hand2",
 		--- For antialiasing: The real shape is set in widget_template
 		shape = gears.shape.rectangle,
-		maximum_width = dpi(350),
+		maximum_width = dpi(400),
 		maximum_height = dpi(180),
+		minimum_width = dpi(360),
 		bg = "#00000000",
 		widget_template = {
 			{

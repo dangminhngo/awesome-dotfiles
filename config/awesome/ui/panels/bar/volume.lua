@@ -8,7 +8,8 @@ local helpers = require("helpers")
 
 return function()
 	local volume = widgets.button.text.state({
-		text_normal_bg = beautiful.fg,
+		text_normal_bg = beautiful.black,
+		text_on_normal_bg = beautiful.fg,
 		normal_bg = beautiful.wibar_bg,
 		font = beautiful.icon_font .. " Round ",
 		size = 18,
@@ -23,7 +24,6 @@ return function()
 			awful.spawn.with_shell([[sh -c "pamixer -d 10"]])
 		end,
 	})
-	local tooltip = helpers.ui.add_tooltip(volume, "Volume")
 
 	awful.widget.watch([[sh -c "pamixer --get-volume"]], 10, function(_, stdout)
 		local value = tonumber(helpers.misc.trim(stdout), 10)
@@ -31,21 +31,19 @@ return function()
 			local is_mute = helpers.misc.trim(out)
 			if is_mute == "true" then
 				volume:set_text("")
-				volume:set_color(beautiful.black)
-				tooltip:set_text("Awkward silent")
+				volume:turn_off()
+				volume:set_tooltip_text("Awkward silent")
 			else
+				volume:turn_on()
 				if value == 0 then
 					volume:set_text("")
-					volume:set_color(beautiful.fg)
 				elseif value <= 50 then
 					volume:set_text("")
-					volume:set_color(beautiful.fg)
 				else
 					volume:set_text("")
-					volume:set_color(beautiful.fg)
 				end
 
-				tooltip:set_text("Volume: " .. value .. "%")
+				volume:set_tooltip_text("Volume: " .. value .. "%")
 			end
 		end)
 

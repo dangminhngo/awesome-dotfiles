@@ -1,18 +1,54 @@
 #!/bin/fish
 
-function nightlight
+function nightlight-off
     set state (pgrep redshift)
 
     if test -n "$state"
-        redshift -x && pkill redshift && killall redshift
+        redshift -x &>/dev/null && pkill redshift && killall redshift
         echo off
-    else
+    end
+end
+
+function nightlight-on
+    set state (pgrep redshift)
+    if test -z "$state"
         redshift -l 0:0 -t 5250:5000 -r &>/dev/null &
         echo on
     end
 end
 
+function idle-off
+    set state (pgrep xautolock)
+
+    if test -n "$state"
+        pkill xautolock && killall xautolock
+        echo on
+    end
+end
+
+function idle-on
+    set state (pgrep xautolock)
+
+    if test -z "$state"
+        xautolock -time 10 -locker 'awesome-client "require('modules.lockscreen.lockscreen')()"' -killtime 15 -killer 'xset dpms force off'
+        echo off
+    end
+end
+
 switch $argv[1]
     case nightlight
-        nightlight
+        switch $argv[2]
+            case on
+                nightlight-on
+            case off
+                nightlight-off
+        end
+
+    case idle
+        switch $argv[2]
+            case on
+                idle-on
+            case off
+                idle-off
+        end
 end

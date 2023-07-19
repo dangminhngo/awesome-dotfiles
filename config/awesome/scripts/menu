@@ -90,7 +90,7 @@ function powermenu
         case $reboot
             reboot
         case $logout
-            awesome-client "awesome.quit"
+            awesome-client "awesome.quit()"
         case $lock
             awesome-client "require('modules.lockscreen.lockscreen')()"
         case $suspend

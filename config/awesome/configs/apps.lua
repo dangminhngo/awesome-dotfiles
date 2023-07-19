@@ -38,5 +38,11 @@ return {
 		screenshot = scripts_dir .. "menu screenshot",
 		--- Color Picker
 		color_picker = scripts_dir .. "menu colorpicker",
+		--- Nightlight
+		nightlight = scripts_dir .. "utils nightlight",
+		--- Idle
+		idle = scripts_dir .. "utils idle",
+		--- Exit Menu
+		exit = scripts_dir .. "menu powermenu",
 	},
 }

@@ -16,6 +16,9 @@ return function()
 	clock:connect_signal("widget:redraw_needed", function()
 		clock.markup = helpers.ui.colorize_text(clock.text, beautiful.white)
 	end)
+	helpers.ui.add_tooltip(clock, function()
+		return os.date("%a - %B %d, %Y")
+	end)
 
 	local widget = wbutton.elevated.state({
 		child = clock,

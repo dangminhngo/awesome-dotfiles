@@ -1,5 +1,6 @@
 local awful = require("awful")
 local filesystem = require("gears.filesystem")
+local apps = require("configs.apps")
 local config_dir = filesystem.get_configuration_dir()
 local helpers = require("helpers")
 
@@ -20,9 +21,7 @@ local function autostart()
 	helpers.run.run_once_grep("blueman-applet")
 	helpers.run.run_once_grep("nm-applet")
 	-- Idle manager
-	helpers.run.run_once_grep(
-		[[xautolock -time 10 -locker 'awesome-client "require('modules.lockscreen.lockscreen')()"' -killtime 15 -killer 'xset dpms force off']]
-	)
+	helpers.run.run_once_grep(apps.utils.idle .. " on")
 end
 
 autostart()

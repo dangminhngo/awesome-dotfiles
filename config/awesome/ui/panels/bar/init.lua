@@ -13,6 +13,7 @@ return function(s)
 	s.ethernet = require("ui.panels.bar.ethernet")()
 	s.volume = require("ui.panels.bar.volume")()
 	s.nightlight = require("ui.panels.bar.nightlight")()
+	s.idle = require("ui.panels.bar.idle")()
 	s.stats = require("ui.panels.bar.stats")()
 
 	-- Animated taglist
@@ -235,6 +236,7 @@ return function(s)
 					{
 						system_tray(),
 						s.volume,
+						s.idle,
 						s.nightlight,
 						s.ethernet,
 						layoutbox(),

@@ -77,6 +77,8 @@ end
 function elevated_button.state(args)
 	args = args or {}
 
+	args.tooltip = args.tooltip or ""
+
 	args.normal_bg = args.normal_bg or beautiful.black
 	args.hover_bg = args.hover_bg or args.normal_bg
 	args.press_bg = args.press_bg or args.normal_bg
@@ -124,6 +126,7 @@ function elevated_button.state(args)
 	args.hover_effect = args.hover_effect == nil and true or args.hover_effect
 
 	local widget = button(args)
+	local tooltip = helpers.ui.add_tooltip(widget, args.tooltip)
 	widget._private.state = false
 
 	function widget:turn_on()
@@ -144,6 +147,14 @@ function elevated_button.state(args)
 
 	if args.on_by_default == true then
 		widget:turn_on()
+	end
+
+	function widget:set_tooltip_text(...)
+		tooltip:set_text(...)
+	end
+
+	function widget:set_tooltip_markup(...)
+		tooltip:set_markup(...)
 	end
 
 	function widget:turn_off()

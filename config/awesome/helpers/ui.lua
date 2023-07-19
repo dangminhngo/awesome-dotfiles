@@ -9,12 +9,21 @@ local beautiful = require("beautiful")
 local _ui = {}
 
 function _ui.add_tooltip(obj, text)
-	local tooltip = awful.tooltip({
-		objects = { obj },
-		text = type(text) == "string" and text,
-		timer_function = type(text) == "function" and text,
-	})
-	return tooltip
+	if type(text) == "string" then
+		local tooltip = awful.tooltip({
+			objects = { obj },
+			text = text,
+		})
+		return tooltip
+	end
+
+	if type(text) == "function" then
+		local tooltip = awful.tooltip({
+			objects = { obj },
+			timer_function = text,
+		})
+		return tooltip
+	end
 end
 
 function _ui.colorize_text(text, color)
