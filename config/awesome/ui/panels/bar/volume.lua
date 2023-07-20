@@ -27,6 +27,9 @@ return function()
 
 	awful.widget.watch([[sh -c "pamixer --get-volume"]], 10, function(_, stdout)
 		local value = tonumber(helpers.misc.trim(stdout), 10)
+		if value == nil then
+			return
+		end
 		awful.spawn.easy_async_with_shell([[sh -c "pamixer --get-mute"]], function(out)
 			local is_mute = helpers.misc.trim(out)
 			if is_mute == "true" then
