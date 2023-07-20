@@ -7,6 +7,7 @@ local xrs = require("beautiful.xresources")
 local dpi = xrs.apply_dpi
 local helpers = require("helpers")
 local icons = require("icons")
+local palette = require("theme.palette")
 
 -- FONTS
 -- UI Fonts
@@ -16,35 +17,35 @@ theme.font = theme.font_name .. " Medium 11"
 theme.icon_font = "Material Icons"
 
 -- COLORS
-theme.transparent = "#00000000"
-theme.fg = "#abc2d0"
-theme.bg = "#10181d"
+theme.transparent = palette.transparent
+theme.fg = palette.fg
+theme.bg = palette.bg
 
 -- Accent color
-theme.accent = "#a4c76f"
+theme.accent = palette.accent
 -- Backgrounds & Foregrounds
-theme.dark = helpers.color.relative_darken(theme.bg, 0.4)
-theme.bg0 = helpers.color.relative_darken(theme.bg, 0.16)
-theme.bg2 = helpers.color.relative_lighten(theme.bg, 0.04)
-theme.bg3 = helpers.color.relative_lighten(theme.bg, 0.08)
-theme.bg4 = helpers.color.relative_lighten(theme.bg, 0.12)
-theme.fg0 = helpers.color.relative_lighten(theme.fg, 0.56)
-theme.fg2 = helpers.color.relative_darken(theme.fg, 0.16)
-theme.fg3 = helpers.color.relative_darken(theme.fg, 0.32)
-theme.fg4 = helpers.color.relative_darken(theme.fg, 0.48)
+theme.dark = palette.dark
+theme.bg0 = palette.bg0
+theme.bg2 = palette.bg2
+theme.bg3 = palette.bg3
+theme.bg4 = palette.bg4
+theme.fg0 = palette.fg0
+theme.fg2 = palette.fg2
+theme.fg3 = palette.fg3
+theme.fg4 = palette.fg4
 -- Palette
-theme.red = "#f15a5d"
-theme.green = "#a4c76f"
-theme.yellow = "#eace60"
-theme.blue = "#619af5"
-theme.magenta = "#9d78d1"
-theme.cyan = "#42b8e6"
-theme.teal = "#72c2b2"
-theme.orange = "#e39d5f"
-theme.pink = "#d983d7"
-theme.black = helpers.color.relative_lighten(theme.bg, 0.18)
-theme.gray = helpers.color.relative_lighten(theme.bg, 0.32)
-theme.white = helpers.color.relative_lighten(theme.fg, 0.64)
+theme.red = palette.red
+theme.green = palette.green
+theme.yellow = palette.yellow
+theme.blue = palette.blue
+theme.magenta = palette.magenta
+theme.cyan = palette.cyan
+theme.teal = palette.teal
+theme.orange = palette.orange
+theme.pink = palette.pink
+theme.black = palette.black
+theme.gray = palette.gray
+theme.white = palette.white
 
 --- Black
 theme.color0 = theme.black
