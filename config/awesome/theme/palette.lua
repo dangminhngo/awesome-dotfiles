@@ -4,10 +4,12 @@ local fg = "#abc2d0"
 local bg = "#10181d"
 
 local palette = {
-
+	colorscheme = "Proxima",
 	fg = fg,
 	bg = bg,
 	transparent = "#00000000",
+	-- Accent color
+	accent = "#a4c76f",
 	-- Backgrounds & Foregrounds
 	dark = helpers.color.relative_darken(bg, 0.4),
 	bg0 = helpers.color.relative_darken(bg, 0.16),
@@ -32,7 +34,5 @@ local palette = {
 	gray = helpers.color.relative_lighten(bg, 0.32),
 	white = helpers.color.relative_lighten(fg, 0.64),
 }
-
-palette.accent = palette.green
 
 return palette

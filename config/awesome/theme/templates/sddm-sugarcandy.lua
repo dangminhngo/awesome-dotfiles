@@ -1,4 +1,15 @@
-[General]
+local helpers = require("helpers")
+
+local _sddm = {}
+
+_sddm.name = "sddm-sugarcandy"
+
+_sddm.path = "sddm-sugarcandy"
+_sddm.filename = "theme.conf"
+
+_sddm.gen = function(pal)
+	local template = helpers.misc.template(
+		[[[General]
 
 Background="greeting.png"
 ## Path relative to the theme root directory. Most standard image file formats are allowed including support for transparency. (e.g. background.jpeg/illustration.GIF/Foto.png/undraw.svgz)
@@ -40,16 +51,16 @@ BackgroundImageHAlignment="center"
 BackgroundImageVAlignment="center"
 ## As before but for the vertical position of the background picture relative to its visible area.
 
-MainColor="e1e9ee"
+MainColor="${white}"
 ## Used for all elements when not focused/hovered etc. Usually the best effect is achieved by having this be either white or a very dark grey like #444 (not black for smoother antialias)
 ## Colors can be HEX or Qt names (e.g. red/salmon/blanchedalmond). See https://doc.qt.io/qt-5/qml-color.html
 
-AccentColor="a4c76f"
+AccentColor="${accent}"
 ## Used for elements in focus/hover/pressed. Should be contrasting to the background and the MainColor to achieve the best effect.
 
-BackgroundColor="10181d"
+BackgroundColor="${bg}"
 ## Used for the user and session selection background as well as for ScreenPadding and FormBackground when either is true. If PartialBlur and FormBackground are both enabled this color will blend with the blur effect.
-OverrideLoginButtonTextColor="10181d"
+OverrideLoginButtonTextColor="${bg}"
 
 ## The text of the login button may become difficult to read depending on your color choices. Use this option to set it independently for legibility.
 
@@ -134,4 +145,11 @@ TranslateReboot=""
 TranslateShutdown=""
 TranslateVirtualKeyboardButton=""
 ## These don't necessarily need to translate anything. You can enter whatever you want here.
-    
+    ]],
+		pal
+	)
+
+	return template
+end
+
+return _sddm

@@ -1,0 +1,3 @@
+#!/bin/fish
+
+awesome-client "require('theme.colorscheme')('$argv[1]')"

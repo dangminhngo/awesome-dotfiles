@@ -1,9 +1,10 @@
+# ${name} colorscheme for zathura
 set default-fg "#abc2d0"
 set default-bg "#10181d"
 
 set completion-bg "#10181d"
 set completion-fg "#abc2d0"
-set completion-highlight-bg "#243642"
+set completion-highlight-bg "#243641"
 set completion-highlight-fg "#abc2d0"
 set completion-group-bg "#10181d"
 set completion-group-fg "#a4c76f"
@@ -25,13 +26,13 @@ set recolor-lightcolor "#10181d"
 set recolor-darkcolor "#abc2d0"
 
 set index-fg "#abc2d0"
-set index-bg "#18232B"
+set index-bg "#172229"
 set index-active-fg "#abc2d0"
 set index-active-bg "#10181d"
 
 set render-loading-bg "#10181d"
 set render-loading-fg "#abc2d0"
 
-set highlight-color "#243642"
+set highlight-color "#243641"
 set highlight-fg "#a4c76f"
 set highlight-active-color "#a4c76f"

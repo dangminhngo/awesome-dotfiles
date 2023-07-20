@@ -1,42 +1,42 @@
-# Proxima for Alacritty
+# ${name} colorscheme for Alacritty
 # ~/.config/alacritty/theme.yml
 colors:
   primary:
-    background: '#0E161A'
+    background: '#0d1418'
     foreground: '#abc2d0'
-    dim_foreground: '#5C88A3'
-    bright_foreground: '#DBE5EB'
+    dim_foreground: '#5d8aa4'
+    bright_foreground: '#dae4ea'
   cursor:
     text: '#10181d'
-    cursor: '#DBE5EB'
+    cursor: '#dae4ea'
   vi_mode_cursor:
     text: '#10181d'
-    cursor: '#DBE5EB'
+    cursor: '#dae4ea'
   search:
     matches:
-      foreground: '#1D2C35'
+      foreground: '#1d2c35'
       background: '#9d78d1'
     focused_match:
       foreground: '#9d78d1'
-      background: '#1D2C35'
+      background: '#1d2c35'
   hints:
     start:
-      foreground: '#1D2C35'
+      foreground: '#1d2c35'
       background: '#eace60'
     end:
       foreground: '#eace60'
-      background: '#1D2C35'
+      background: '#1d2c35'
   line_indicator:
     foreground: None
     background: None
   footer_bar:
-    foreground: '#1D2C35'
+    foreground: '#1d2c35'
     background: '#9d78d1'
   selection:
     text: '#abc2d0'
-    background: '#243642'
+    background: '#243641'
   normal:
-    black: '#2D4452'
+    black: '#2e4553'
     red: '#f15a5d'
     green: '#a4c76f'
     yellow: '#eace60'
@@ -45,7 +45,7 @@ colors:
     cyan: '#42b8e6'
     white: '#abc2d0'
   bright:
-    black: '#2D4452'
+    black: '#2e4553'
     red: '#f15a5d'
     green: '#a4c76f'
     yellow: '#eace60'

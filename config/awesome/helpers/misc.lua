@@ -121,4 +121,60 @@ function _misc.trim(s)
 	return string.gsub(s, "^%s*(.-)%s*$", "%1")
 end
 
+function _misc.deepcopy(orig, copies)
+	copies = copies or {}
+	local orig_type = type(orig)
+	local copy
+	if orig_type == "table" then
+		if copies[orig] then
+			copy = copies[orig]
+		else
+			copy = {}
+			copies[orig] = copy
+			for orig_key, orig_value in next, orig, nil do
+				copy[_misc.deepcopy(orig_key, copies)] = _misc.deepcopy(orig_value, copies)
+			end
+			setmetatable(copy, _misc.deepcopy(getmetatable(orig), copies))
+		end
+	else -- number, string, boolean, etc
+		copy = orig
+	end
+	return copy
+end
+
+function _misc.template(tpl, pal)
+	return (
+		tpl:gsub("($%b{})", function(w)
+			local k = w:sub(3, -2)
+			if k == "name" then
+				return pal.name or w
+			end
+
+			return pal[w:sub(3, -2)] or w
+		end)
+	)
+end
+
+function _misc.palette_without_sharp(pal)
+	local _pal = _misc.deepcopy(pal)
+	for k, v in pairs(pal) do
+		if type(v) == "string" then
+			pal[k] = v:gsub("^#", "")
+		end
+	end
+	return _pal
+end
+
+function _misc.cwd(file)
+	local chr = os.tmpname():sub(1, 1)
+	if chr == "/" then
+		-- linux
+		chr = "/[^/]*$"
+	else
+		-- windows
+		chr = "\\[^\\]*$"
+	end
+	return arg[0]:sub(1, arg[0]:find(chr)) .. (file or "")
+end
+
 return _misc

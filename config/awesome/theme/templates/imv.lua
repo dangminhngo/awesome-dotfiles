@@ -1,3 +1,15 @@
+local helpers = require("helpers")
+
+local _imv = {}
+
+_imv.name = "imv"
+
+_imv.path = "imv"
+_imv.filename = "config"
+
+_imv.gen = function(pal)
+	local template = helpers.misc.template(
+		[[
 # ▪  • ▌ ▄ ·.  ▌ ▐·
 # ██ ·██ ▐███▪▪█·█▌
 # ▐█·▐█ ▌▐▌▐█·▐█▐█•
@@ -12,11 +24,11 @@
 
 # styling
 [options]
-background = #10181d
+background = ${bg}
 fullscreen = false
 overlay = true
-overlay_text_color = #e1e9ee
-overlay_background_color = #172229
+overlay_text_color = ${white}
+overlay_background_color = ${bg2}
 overlay_background_alpha = ff
 overlay_font = Jetka:11
 overlay_position_bottom = false
@@ -24,4 +36,11 @@ overlay_position_bottom = false
 # bindings
 [binds]
 j = next
-k = prev
+k = prev]],
+		pal
+	)
+
+	return template
+end
+
+return _imv
