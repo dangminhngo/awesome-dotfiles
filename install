@@ -90,6 +90,7 @@ paru -S --noconfirm --needed \
     xautolock \
     xclip \
     xorg \
+    xorg-xinit \
     xorg-xlsclients \
     zathura \
     zathura-pdf-poppler
@@ -140,6 +141,7 @@ sudo rsync ./system/xorg.conf.d/* /etc/X11/xorg.conf.d/
 rsync ./system/.gitconfig ~/
 sudo rsync --recursive ./system/reflector /etc/xdg/
 rsync --recursive ./system/.icons ~/
+rsync ./system/.xinitrc ~/
 
 # Remove default cursor theme
 sudo rm -rf /usr/share/icons/default

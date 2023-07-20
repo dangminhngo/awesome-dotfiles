@@ -12,6 +12,7 @@
 !/config/imv
 !/config/rofi
 !/config/sddm-sugarcandy
+!/config/tmux
 !/config/zathura
 !/config/starship.toml
 
