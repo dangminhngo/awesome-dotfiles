@@ -5,7 +5,7 @@ local string = string
 local _run = {}
 
 function _run.run(cmd)
-	awful.spawn.easy_async_with_shell(cmd)
+	awful.spawn.easy_async_with_shell(cmd, function() end)
 end
 
 function _run.run_once_pgrep(cmd)
