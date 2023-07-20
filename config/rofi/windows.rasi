@@ -10,7 +10,7 @@
  */
 
 configuration {
-  font:                           "Jetka Medium 11";
+  font:                           "Jetka Medium 12";
   show-icons:                     true;
   icon-theme:                     "Papirus-Dark";
   display-window:                 "Windows";
@@ -40,7 +40,7 @@ prompt {
   background-color:               @blue;
   text-color:                     @bg;
   border-radius:                  4px;
-  font:                           "Jetka Medium 11";
+  font:                           "Jetka Medium 12";
 }
 
 textbox-prompt-colon {

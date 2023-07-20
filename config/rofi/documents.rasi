@@ -39,7 +39,7 @@ prompt {
   background-color:               @magenta;
   text-color:                     @bg;
   border-radius:                  4px;
-  font:                           "Jetka Medium 11";
+  font:                           "Jetka Medium 12";
 }
 
 textbox-prompt-colon {

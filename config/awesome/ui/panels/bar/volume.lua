@@ -18,10 +18,10 @@ return function()
 			awful.spawn(apps.default.sound_control, false)
 		end,
 		on_scroll_up = function()
-			awful.spawn.with_shell([[sh -c "pamixer -i 10"]])
+			awful.spawn.with_shell([[sh -c "pamixer -i 8"]])
 		end,
 		on_scroll_down = function()
-			awful.spawn.with_shell([[sh -c "pamixer -d 10"]])
+			awful.spawn.with_shell([[sh -c "pamixer -d 8"]])
 		end,
 	})
 

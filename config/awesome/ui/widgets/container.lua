@@ -14,6 +14,8 @@ local container = { mt = {} }
 local function new(args)
 	args = args or {}
 
+	args.tooltip = args.tooltip or nil
+	args.visible = args.visible or true
 	args.direction = args.direction or nil
 	args.forced_width = args.forced_width or nil
 	args.forced_height = args.forced_height or nil
@@ -33,6 +35,7 @@ local function new(args)
 
 	local widget = wibox.widget({
 		widget = wibox.container.rotate,
+		visible = args.visible,
 		direction = args.direction,
 		{
 			widget = wibox.container.constraint,
@@ -69,6 +72,16 @@ local function new(args)
 			},
 		},
 	})
+
+	local tooltip = helpers.ui.add_tooltip(widget, args.tooltip or "")
+
+	function widget:set_tooltip_text(...)
+		tooltip:set_text(...)
+	end
+
+	function widget:set_tooltip_markup(...)
+		tooltip:set_markup(...)
+	end
 
 	return widget
 end

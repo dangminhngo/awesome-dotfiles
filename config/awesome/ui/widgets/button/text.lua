@@ -76,7 +76,7 @@ end
 function text_button.state(args)
 	args = args or {}
 
-	args.text_normal_bg = args.text_normal_bg or beautiful.random_accent_color()
+	args.text_normal_bg = args.text_normal_bg or beautiful.accent
 	args.text_hover_bg = args.text_hover_bg or helpers.color.button_color(args.text_normal_bg, 0.1)
 	args.text_press_bg = args.text_press_bg or helpers.color.button_color(args.text_normal_bg, 0.2)
 

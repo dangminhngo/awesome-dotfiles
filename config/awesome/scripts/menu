@@ -92,61 +92,40 @@ function powermenu
         case $logout
             awesome-client "awesome.quit()"
         case $lock
-            awesome-client "require('modules.lockscreen.lockscreen')()"
+            ~/.config/awesome/scripts/utils lock
         case $suspend
             systemctl suspend
     end
 end
 
 # --------------------------------------------------------------------------------------------------
-# RECORDER
+# CAPTURE
 # --------------------------------------------------------------------------------------------------
-function recorder
-    set bar eww --config ~/.config/eww/bar
-    set pid (pgrep wf-recorder)
+function capture
+    set sct ~/.config/awesome/scripts/screencapture
+    set theme ~/.config/rofi/capture.rasi
+    killall -q rofi
 
-    # TODO: How can I stop wf-recorder normally without damaging video file.
-    if test -n "$pid"
-        notify-send "A recording instance has running. Kill it before creating new instance."
-    else
-        set theme ~/.config/rofi/recorder.rasi
-        set savepath (xdg-user-dir VIDEOS)/recordings
-        mkdir -p $savepath
+    # Options
+    set full ""
+    set area ""
 
-        killall -q rofi
+    # Variables passed to dmenu
+    set options "$full\n$area"
 
-        # Options
-        set sound ""
-        set silent ""
-        set crop ""
+    set opt (echo -e $options | rofi -dmenu -p "ffmpeg" -theme $theme)
 
-        # Variables passed to dmenu
-        set options "$sound\n$silent\n$crop"
-
-        set opt (echo -e $options | rofi -dmenu -p "wf-recorder" -theme $theme)
-
-        if test -z $opt
-            exit 0
-        end
-
-        switch $opt
-            case $sound
-                notify-send "Recording in Sound Mode. CTRL-C to stop."
-                $bar update rec=true
-                alacritty -e wf-recorder -a -f $savepath/(date +%Y%m%d_%H%M%S.mp4)
-                $bar update rec=false
-            case $silent
-                notify-send "Recording in Silent Mode. CTRL-C to stop."
-                $bar update rec=true
-                alacritty -e wf-recorder -f $savepath/(date +%Y%m%d_%H%M%S.mp4)
-                $bar update rec=false
-            case $crop
-                notify-send "Recording in Crop Mode. CTRL-C to stop."
-                $bar update rec=true
-                alacritty -e wf-recorder -g (slurp) -f $savepath/(date +%Y%m%d_%H%M%S.mp4)
-                $bar update rec=false
-        end
+    if test -z $opt
+        exit 0
     end
+
+    switch $opt
+        case $full
+            $sct full
+        case $area
+            $sct area
+    end
+
 end
 
 # --------------------------------------------------------------------------------------------------
@@ -165,7 +144,7 @@ function screenshot
     # Variables passed to dmenu
     set options "$full\n$area\n$focused"
 
-    set opt (echo -e $options | rofi -dmenu -p "scrot" -theme $theme)
+    set opt (echo -e $options | rofi -dmenu -p "maim" -theme $theme)
 
     if test -z $opt
         exit 0
@@ -186,31 +165,12 @@ end
 # --------------------------------------------------------------------------------------------------
 function windowpicker
     set theme ~/.config/rofi/windows.rasi
-
     killall -q rofi
-
-    set windows (string trim -l (string replace "title: " "" (hyprctl clients | grep title)))
-    set pids (string trim -l (string replace "pid: " "" (hyprctl clients | grep pid)))
-
-    for i in (seq (count $windows))
-        set pid_windows[$i] "$pids[$i]  $windows[$i]"
-    end
-
-    if test (count $pid_windows) -eq 0
-        exit 0
-    end
-
-    set options (string join "\n" $pid_windows)
-
-    set opt (echo -e $options | rofi -dmenu -p "Windows" -theme $theme)
+    set opt (rofi -show window -theme $theme)
 
     if test -z $opt
         exit 0
     end
-
-    set focus_pid (string split "  " $opt)[1]
-    hyprctl dispatch focuswindow pid:$focus_pid
-    exit 0
 end
 
 switch $argv[1]
@@ -222,8 +182,8 @@ switch $argv[1]
         launcher
     case powermenu
         powermenu
-    case recorder
-        recorder
+    case capture
+        capture
     case screenshot
         screenshot
     case windowpicker

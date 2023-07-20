@@ -1,0 +1,97 @@
+#!/bin/fish
+
+set SCREENCAPTURE_DIR (xdg-user-dir VIDEOS)/Captures
+mkdir -p $SCREENCAPTURE_DIR
+
+if test -z (command -v ffmpeg)
+    awesome-client "
+    local naughty = require('naughty')
+    naughty.notification({
+      title = 'Missing dependency: ffmpeg',
+      app_name = 'Screen Capture'
+    })
+  "
+    exit 1
+end
+
+if test -z (command -v slop)
+    awesome-client "
+    local naughty = require('naughty')
+    naughty.notification({
+      title = 'Missing dependency: slop',
+      app_name = 'Screen Capture'
+    })
+  "
+    exit 1
+end
+
+function summary
+    set target $argv[1]
+    awesome-client "
+	    -- IMPORTANT NOTE: THIS PART OF THE SCRIPT IS LUA!
+	    naughty = require('naughty')
+	    awful = require('awful')
+
+	    local open_capture = naughty.action {
+	    	name = 'Open',
+	       	icon_only = false,
+	    }
+
+	    local delete_capture = naughty.action {
+	    	name = 'Delete',
+	       	icon_only = false,
+	    }
+
+	    -- Execute the callback when 'Open' is pressed
+	    open_capture:connect_signal('invoked', function()
+	    	awful.spawn('ffplay ' .. '$target', false)
+	    end)
+
+	    -- Execute the callback when 'Delete' is pressed
+	    delete_capture:connect_signal('invoked', function()
+	    	awful.spawn('gio trash ' .. '$target', false)
+	    end)
+
+	    -- Show notification
+	    naughty.notification ({
+	    	title = 'Beep!',
+        message = 'A screen capture video saved',
+	    	app_name = 'Screen Capture',
+	    	icon = '$target',
+	    	timeout = 10,
+	    	actions = { open_capture, delete_capture }
+	    })
+	    "
+end
+
+function full
+    awesome-client "require('ui.panels.bar.capture').indicate()"
+    set timestamp (date "+%Y%m%d_%H%M%S")
+    set file "$SCREENCAPTURE_DIR/$timestamp-full.mp4"
+    ffmpeg -f x11grab -video_size 1920x1080 -framerate 25 -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac $file
+    summary $file
+end
+
+function area
+    awesome-client "require('ui.panels.bar.capture').indicate()"
+    set timestamp (date "+%Y%m%d_%H%M%S")
+    set file "$SCREENCAPTURE_DIR/$timestamp-area.mp4"
+    set geo (string split " " (slop -f "%x %y %w %h"))
+    ffmpeg -f x11grab -video_size $geo[3]x$geo[4] -framerate 25 -i :0.0+$geo[1],$geo[2] -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac $file
+    summary $file
+end
+
+function stop
+    pkill ffmpeg
+end
+
+switch $argv[1]
+    case full
+        full
+    case area
+        area
+    case stop
+        stop
+    case *
+        full
+end

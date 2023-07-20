@@ -3,11 +3,22 @@
 set SCREENSHOT_DIR (xdg-user-dir PICTURES)/Screenshots
 mkdir -p $SCREENSHOT_DIR
 
-if test -z (command -v scrot)
+if test -z (command -v maim)
     awesome-client "
     local naughty = require('naughty')
     naughty.notification({
-      title = 'Missing dependency: scrot',
+      title = 'Missing dependency: maim',
+      app_name = 'Screenshot'
+    })
+  "
+    exit 1
+end
+
+if test -z (command -v xdotool)
+    awesome-client "
+    local naughty = require('naughty')
+    naughty.notification({
+      title = 'Missing dependency: xdotool',
       app_name = 'Screenshot'
     })
   "
@@ -34,7 +45,7 @@ function summary
 
 	    -- Execute the callback when 'Open' is pressed
 	    open_image:connect_signal('invoked', function()
-	    	awful.spawn('xdg-open ' .. '$target', false)
+	    	awful.spawn('imv ' .. '$target', false)
 	    end)
 
 	    -- Execute the callback when 'Delete' is pressed
@@ -57,21 +68,21 @@ end
 function full
     set timestamp (date "+%Y%m%d_%H%M%S")
     set file "$SCREENSHOT_DIR/$timestamp-full.png"
-    scrot -d 1 -F $file
+    maim -d 1 $file
     summary $file
 end
 
 function area
     set timestamp (date "+%Y%m%d_%H%M%S")
     set file "$SCREENSHOT_DIR/$timestamp-area.png"
-    scrot -d 1 -s -f -F $file
+    maim -d 1 -s $file
     summary $file
 end
 
 function focused
     set timestamp (date "+%Y%m%d_%H%M%S")
     set file "$SCREENSHOT_DIR/$timestamp-focused.png"
-    scrot -d 1 -u -f -F $file
+    maim -d 1 -i $(xdotool getactivewindow) $file
     summary $file
 end
 

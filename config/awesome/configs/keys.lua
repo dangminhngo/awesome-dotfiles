@@ -165,14 +165,24 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "mute volume", group = "hotkeys" }),
 
 	--- Color picker
+	awful.key({ mod }, "slash", function()
+		awful.spawn.easy_async_with_shell(apps.utils.window_picker, function() end)
+	end, { description = "open window picker", group = "hotkeys" }),
+
+	--- Color picker
 	awful.key({ mod, shift }, "x", function()
 		awful.spawn.easy_async_with_shell(apps.utils.color_picker, function() end)
 	end, { description = "open color picker", group = "hotkeys" }),
 
-	--- Screenshots
+	--- Screenshot
 	awful.key({}, "Print", function()
 		awful.spawn.easy_async_with_shell(apps.utils.screenshot, function() end)
 	end, { description = "take a screenshot", group = "hotkeys" }),
+
+	--- Screen Capture
+	awful.key({ alt }, "Print", function()
+		awful.spawn.easy_async_with_shell(apps.utils.screen_capture, function() end)
+	end, { description = "capture the screen", group = "hotkeys" }),
 
 	--- Lockscreen
 	awful.key({ mod, alt }, "l", function()

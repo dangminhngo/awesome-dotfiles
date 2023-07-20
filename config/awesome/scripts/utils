@@ -17,6 +17,10 @@ function nightlight-on
     end
 end
 
+function lock
+    awesome-client "require('modules.lockscreen.lockscreen')()"
+end
+
 function idle-off
     set state (pgrep xautolock)
 
@@ -30,7 +34,7 @@ function idle-on
     set state (pgrep xautolock)
 
     if test -z "$state"
-        xautolock -time 10 -locker 'awesome-client "require('modules.lockscreen.lockscreen')()"' -killtime 15 -killer 'xset dpms force off'
+        xautolock -time 10 -locker "$HOME/.config/awesome/scripts/utils lock"
         echo off
     end
 end
@@ -53,6 +57,7 @@ end
 switch $argv[1]
     case xcolor
         xcolor $argv[2]
+
     case nightlight
         switch $argv[2]
             case on
@@ -68,4 +73,7 @@ switch $argv[1]
             case off
                 idle-off
         end
+
+    case lock
+        lock
 end

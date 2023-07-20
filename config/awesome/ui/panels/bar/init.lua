@@ -14,6 +14,7 @@ return function(s)
 	s.volume = require("ui.panels.bar.volume")()
 	s.nightlight = require("ui.panels.bar.nightlight")()
 	s.idle = require("ui.panels.bar.idle")()
+	s.capture = require("ui.panels.bar.capture").widget()
 	s.stats = require("ui.panels.bar.stats")()
 
 	-- Animated taglist
@@ -238,6 +239,7 @@ return function(s)
 					tag_list(s),
 					{
 						system_tray(),
+						s.capture,
 						s.volume,
 						s.idle,
 						s.nightlight,

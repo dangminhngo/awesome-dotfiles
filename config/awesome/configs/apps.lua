@@ -36,6 +36,8 @@ return {
 	utils = {
 		--- Screenshot
 		screenshot = scripts_dir .. "menu screenshot",
+		--- Screen Capture
+		screen_capture = scripts_dir .. "menu capture",
 		--- Color Picker
 		color_picker = scripts_dir .. "menu colorpicker",
 		--- Nightlight
@@ -44,5 +46,7 @@ return {
 		idle = scripts_dir .. "utils idle",
 		--- Exit Menu
 		exit = scripts_dir .. "menu powermenu",
+		--- Window Picker
+		window_picker = scripts_dir .. "menu windowpicker",
 	},
 }

@@ -58,6 +58,7 @@ paru -S --noconfirm --needed \
     lazygit \
     lf \
     luacheck \
+    maim \
     man \
     neovim \
     net-tools \
@@ -72,7 +73,6 @@ paru -S --noconfirm --needed \
     rsync \
     rustup \
     socat \
-    scrot \
     starship \
     stylua \
     tree \
@@ -81,6 +81,8 @@ paru -S --noconfirm --needed \
     xdg-desktop-portal \
     xdg-utils \
     xdg-user-dirs \
+    xdotool \
+    xf86-video-amdgpu \
     vscode \
     wireplumber \
     xautolock \
