@@ -44,6 +44,7 @@ paru -S --noconfirm --needed \
     docker-compose \
     docker-machine \
     fd \
+    ffmpeg \
     firefox-developer-edition \
     fish \
     git \
@@ -72,6 +73,7 @@ paru -S --noconfirm --needed \
     rofi \
     rsync \
     rustup \
+    slop \
     socat \
     starship \
     stylua \
