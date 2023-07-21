@@ -159,7 +159,7 @@ function _misc.palette_without_sharp(pal)
 	local _pal = _misc.deepcopy(pal)
 	for k, v in pairs(pal) do
 		if type(v) == "string" then
-			pal[k] = v:gsub("^#", "")
+			_pal[k] = v:gsub("^#", "")
 		end
 	end
 	return _pal
