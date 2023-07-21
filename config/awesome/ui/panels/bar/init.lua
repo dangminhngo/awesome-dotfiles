@@ -12,6 +12,7 @@ return function(s)
 	s.clock = require("ui.panels.bar.clock")()
 	s.ethernet = require("ui.panels.bar.ethernet")()
 	s.volume = require("ui.panels.bar.volume")()
+	s.notif = require("ui.panels.bar.notif")()
 	s.nightlight = require("ui.panels.bar.nightlight")()
 	s.idle = require("ui.panels.bar.idle")()
 	s.capture = require("ui.panels.bar.capture").widget()
@@ -243,6 +244,7 @@ return function(s)
 						s.volume,
 						s.idle,
 						s.nightlight,
+						s.notif,
 						s.ethernet,
 						layoutbox(),
 						layout = wibox.layout.fixed.horizontal,

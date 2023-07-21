@@ -20,7 +20,7 @@ configuration {
 
 * {
   background-color:               @bg0;
-  text-color:                     @gray;
+  text-color:                     @black;
 }
 
 window {
@@ -57,7 +57,7 @@ inputbar {
   children:                       [ textbox-prompt-colon, prompt ];
   spacing:                        12px;
   background-color:               @bg0;
-  text-color:                     @gray;
+  text-color:                     @black;
   expand:                         false;
   border:                         0px;
   border-radius:                  0px;
@@ -85,7 +85,7 @@ mainbox {
 
 element {
   background-color:               @bg;
-  text-color:                     @gray;
+  text-color:                     @black;
   orientation:                    vertical;
   border-radius:                  4px;
 }
@@ -93,7 +93,7 @@ element {
 element-text {
   background-color:               inherit;
   text-color:                     inherit;
-  font:                           "Material Icons Round 28";
+  font:                           "Material Icons Round 32";
   expand:                         true;
   horizontal-align:               0.5;
   vertical-align:                 0.5;
@@ -115,7 +115,7 @@ element alternate.active {
 element selected {
   background-color:               @bg2;
   text-color:                     @yellow;
-  border:                         0px 0px 4px 4px;
-  border-radius:                  4px;
+  border:                         0px 0px 8px 8px;
+  border-radius:                  8px;
   border-color:                   @yellow;
 }

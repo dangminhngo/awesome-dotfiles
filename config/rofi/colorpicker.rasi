@@ -20,16 +20,16 @@ configuration {
 
 * {
   background-color:               @bg0;
-  text-color:                     @gray;
+  text-color:                     @black;
 }
 
 window {
   transparency:                   "real";
-  border-radius:                  4px;
-  border:                         1px;
+  border-radius:                  8px;
+  border:                         2px;
   border-color:                   @bg2;
   location:                       center;
-  width:                          360px;
+  width:                          424px;
   x-offset:                       0px;
   y-offset:                       0px;
 }
@@ -57,7 +57,7 @@ inputbar {
   children:                       [ textbox-prompt-colon, prompt ];
   spacing:                        12px;
   background-color:               @bg0;
-  text-color:                     @gray;
+  text-color:                     @black;
   expand:                         false;
   border:                         0px;
   border-radius:                  0px;
@@ -70,7 +70,7 @@ inputbar {
 listview {
   columns:                        3;
   lines:                          1;
-  spacing:                        12px;
+  spacing:                        16px;
   cycle:                          true;
   dynamic:                        true;
   layout:                         vertical;
@@ -79,15 +79,15 @@ listview {
 mainbox {
   background-color:               @bg0;
   children:                       [ inputbar, listview ];
-  spacing:                        12px;
-  margin:                         12px;
+  spacing:                        16px;
+  margin:                         16px;
 }
 
 element {
   background-color:               @bg;
-  text-color:                     @gray;
+  text-color:                     @black;
   orientation:                    vertical;
-  border-radius:                  4px;
+  border-radius:                  8px;
 }
 
 element-text {
@@ -103,7 +103,7 @@ element-text {
 element normal.urgent,
 element alternate.urgent {
   text-color:                     @bg0;
-  border-radius:                  4px;
+  border-radius:                  8px;
 }
 
 element normal.active,
@@ -115,7 +115,7 @@ element alternate.active {
 element selected {
   background-color:               @bg2;
   text-color:                     @cyan;
-  border:                         0px 0px 4px 4px;
-  border-radius:                  4px;
+  border:                         0px 0px 8px 8px;
+  border-radius:                  8px;
   border-color:                   @cyan;
 }

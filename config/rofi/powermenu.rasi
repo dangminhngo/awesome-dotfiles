@@ -20,16 +20,16 @@ configuration {
 
 * {
   background-color:               @bg0;
-  text-color:                     @gray;
+  text-color:                     @black;
 }
 
 window {
   transparency:                   "real";
-  border-radius:                  4px;
-  border:                         1px;
+  border-radius:                  8px;
+  border:                         2px;
   border-color:                   @red;
   location:                       center;
-  width:                          600px;
+  width:                          696px;
   x-offset:                       0px;
   y-offset:                       0px;
 }
@@ -46,7 +46,7 @@ prompt {
 
 textbox-prompt-colon {
   expand:                         false;
-  str:                            "Time to say goodbye, Dang Minh!";
+  str:                            "See you!";
   background-color:               @red;
   text-color:                     @bg0;
   padding:                        5px;
@@ -57,7 +57,7 @@ inputbar {
   children:                       [ textbox-prompt-colon, prompt ];
   spacing:                        12px;
   background-color:               @bg0;
-  text-color:                     @gray;
+  text-color:                     @black;
   expand:                         false;
   border:                         0px;
   border-radius:                  0px;
@@ -70,7 +70,7 @@ inputbar {
 listview {
   columns:                        5;
   lines:                          1;
-  spacing:                        12px;
+  spacing:                        16px;
   cycle:                          true;
   dynamic:                        true;
   layout:                         vertical;
@@ -79,21 +79,21 @@ listview {
 mainbox {
   background-color:               @bg0;
   children:                       [ inputbar, listview ];
-  spacing:                        12px;
-  margin:                         12px;
+  spacing:                        16px;
+  margin:                         16px;
 }
 
 element {
   background-color:               @bg;
-  text-color:                     @gray;
+  text-color:                     @black;
   orientation:                    vertical;
-  border-radius:                  4px;
+  border-radius:                  8px;
 }
 
 element-text {
   background-color:               inherit;
   text-color:                     inherit;
-  font:                           "Material Icons Round 28";
+  font:                           "Material Icons Round 32";
   expand:                         true;
   horizontal-align:               0.5;
   vertical-align:                 0.5;
@@ -103,7 +103,7 @@ element-text {
 element normal.urgent,
 element alternate.urgent {
   text-color:                     @bg0;
-  border-radius:                  4px;
+  border-radius:                  8px;
 }
 
 element normal.active,
@@ -115,7 +115,7 @@ element alternate.active {
 element selected {
   background-color:               @bg2;
   text-color:                     @red;
-  border:                         0px 0px 4px 4px;
-  border-radius:                  4px;
+  border:                         0px 0px 8px 8px;
+  border-radius:                  8px;
   border-color:                   @red;
 }

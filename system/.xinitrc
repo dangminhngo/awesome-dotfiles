@@ -40,6 +40,3 @@ exec xterm -geometry 80x66+0+0 -name login
 xrandr --output HDMI-A-0 --mode 1920x1080 --rate 75
 xset r rate 400 50
 xset -b
-xset s noblank
-xset s off
-xset -dpms

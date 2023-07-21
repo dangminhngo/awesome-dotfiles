@@ -24,10 +24,10 @@ configuration {
 window {
   transparency:                   "real";
   background-color:               @bg0;
-  text-color:                     @gray;
-  border:                         1px;
+  text-color:                     @black;
+  border:                         2px;
   border-color:                   @bg2;
-  border-radius:                  4px;
+  border-radius:                  8px;
   width:                          600px;
   location:                       center;
   x-offset:                       0px;
@@ -46,15 +46,15 @@ prompt {
 textbox-prompt-colon {
   padding:                        10px;
   background-color:               @bg0;
-  text-color:                     @gray;
+  text-color:                     @black;
   expand:                         false;
   str:                            " :: ";
 }
 
 entry {
   background-color:               @none;
-  text-color:                     @gray;
-  placeholder-color:              @gray;
+  text-color:                     @black;
+  placeholder-color:              @black;
   expand:                         true;
   horizontal-align:               0;
   placeholder:                    "Search...";
@@ -65,7 +65,7 @@ entry {
 inputbar {
   children:                       [ prompt, entry ];
   background-color:               @bg;
-  text-color:                     @gray;
+  text-color:                     @black;
   expand:                         false;
   border:                         0% 0% 0% 0%;
   border-radius:                  4px;
@@ -77,7 +77,7 @@ listview {
   padding:                        0px;
   columns:                        1;
   lines:                          6;
-  spacing:                        1%;
+  spacing:                        8px;
   cycle:                          false;
   dynamic:                        true;
   layout:                         vertical;
@@ -89,13 +89,13 @@ mainbox {
   border-radius:                  0% 0% 0% 0%;
   border-color:                   @blue;
   children:                       [ inputbar, listview ];
-  spacing:                        12px;
-  padding:                        12px;
+  spacing:                        16px;
+  padding:                        16px;
 }
 
 element {
   background-color:               @bg;
-  text-color:                     @gray;
+  text-color:                     @black;
   orientation:                    horizontal;
   border-radius:                  4px;
   padding:                        10px 20px;

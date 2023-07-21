@@ -14,8 +14,8 @@ local widgets = require("ui.widgets")
 
 naughty.persistence_enabled = true
 naughty.config.defaults.ontop = true
-naughty.config.defaults.timeout = 6
-naughty.config.defaults.title = "System Notification"
+naughty.config.defaults.timeout = 10
+naughty.config.defaults.title = "System"
 naughty.config.defaults.position = "bottom_right"
 
 local function get_oldest_notification()
@@ -54,8 +54,8 @@ naughty.connect_signal("request::display", function(n)
 	local app_icons = {
 		["firefox"] = { icon = "" },
 		["discord"] = { icon = "" },
-		["music"] = { icon = "" },
-		["Screenshot"] = { icon = "" },
+		["music"] = { icon = "" },
+		["Screenshot"] = { icon = "" },
 		["Color Picker"] = { icon = "" },
 	}
 
@@ -121,7 +121,7 @@ naughty.connect_signal("request::display", function(n)
 	})
 
 	local app_name = widgets.text({
-		size = 11,
+		size = 10,
 		bold = true,
 		text = n.app_name:gsub("^%l", string.upper),
 	})
@@ -132,7 +132,8 @@ naughty.connect_signal("request::display", function(n)
 		size = 8,
 		bold = true,
 		text = "",
-		text_normal_bg = beautiful.accent,
+		text_normal_bg = beautiful.fg,
+		tooltip = "Dismiss",
 		animate_size = false,
 		on_release = function()
 			n:destroy(naughty.notification_closed_reason.dismissed_by_user)
@@ -141,8 +142,8 @@ naughty.connect_signal("request::display", function(n)
 
 	local timeout_arc = wibox.widget({
 		widget = wibox.container.arcchart,
-		forced_width = dpi(26),
-		forced_height = dpi(26),
+		forced_width = dpi(24),
+		forced_height = dpi(24),
 		max_value = 100,
 		min_value = 0,
 		value = 0,
@@ -156,10 +157,10 @@ naughty.connect_signal("request::display", function(n)
 				to = { 400, 400 },
 				stops = {
 					{ 0, beautiful.accent },
-					{ 0.2, beautiful.accent },
-					{ 0.4, beautiful.accent },
-					{ 0.6, beautiful.accent },
-					{ 0.8, beautiful.accent },
+					{ 0.2, beautiful.blue },
+					{ 0.4, beautiful.yellow },
+					{ 0.6, beautiful.orange },
+					{ 0.8, beautiful.red },
 				},
 			},
 		},
@@ -194,7 +195,7 @@ naughty.connect_signal("request::display", function(n)
 	local actions = wibox.widget({
 		notification = n,
 		base_layout = wibox.widget({
-			spacing = dpi(3),
+			spacing = dpi(6),
 			layout = wibox.layout.flex.horizontal,
 		}),
 		widget_template = {
@@ -211,9 +212,10 @@ naughty.connect_signal("request::display", function(n)
 				},
 				widget = wibox.container.place,
 			},
-			bg = beautiful.widget_bg,
-			forced_height = dpi(25),
+			bg = beautiful.bg0,
+			forced_height = dpi(32),
 			forced_width = dpi(70),
+			shape = helpers.ui.rrect(dpi(4)),
 			widget = wibox.container.background,
 		},
 		style = {
@@ -229,9 +231,10 @@ naughty.connect_signal("request::display", function(n)
 		cursor = "hand2",
 		--- For antialiasing: The real shape is set in widget_template
 		shape = gears.shape.rectangle,
-		maximum_width = dpi(400),
+		maximum_width = dpi(440),
 		maximum_height = dpi(180),
-		minimum_width = dpi(360),
+		minimum_width = dpi(400),
+		minimum_height = dpi(120),
 		bg = "#00000000",
 		widget_template = {
 			{
@@ -270,7 +273,7 @@ naughty.connect_signal("request::display", function(n)
 							},
 						},
 						{
-							helpers.ui.vertical_pad(dpi(10)),
+							helpers.ui.vertical_pad(dpi(16)),
 							{
 								actions,
 								shape = helpers.ui.rrect(beautiful.border_radius / 2),
@@ -326,13 +329,22 @@ naughty.connect_signal("request::display", function(n)
 	end
 
 	anim:start()
-
-	--- Destroy popups notifs if dont_disturb mode is on
-	if _G.dnd_state then
-		naughty.destroy_all_notifications(nil, 1)
-	end
 end)
 
 -- naughty.notification({
--- 	title = "This is title",
+-- 	title = "Hello World",
+-- 	message = "I am the message for you",
+-- 	app_name = "Screenshot",
+-- 	timeout = 100,
+-- 	actions = {
+-- 		naughty.action({
+-- 			name = "Accept",
+-- 		}),
+-- 		naughty.action({
+-- 			name = "Refuse",
+-- 		}),
+-- 		naughty.action({
+-- 			name = "Ignore",
+-- 		}),
+-- 	},
 -- })

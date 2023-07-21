@@ -164,7 +164,7 @@ awful.keyboard.append_global_keybindings({
 		awful.spawn("amixer sset Master toggle", false)
 	end, { description = "mute volume", group = "hotkeys" }),
 
-	--- Color picker
+	--- Window picker
 	awful.key({ mod }, "slash", function()
 		awful.spawn.easy_async_with_shell(apps.utils.window_picker, function() end)
 	end, { description = "open window picker", group = "hotkeys" }),
