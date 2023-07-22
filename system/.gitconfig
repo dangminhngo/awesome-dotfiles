@@ -3,3 +3,5 @@
 	name = dangminhngo
 [core]
 	editor = nvim
+[color]
+  ui = auto
