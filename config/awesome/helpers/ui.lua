@@ -13,6 +13,7 @@ function _ui.add_tooltip(obj, text)
 		local tooltip = awful.tooltip({
 			objects = { obj },
 			text = text,
+			mode = "outside",
 		})
 		return tooltip
 	end

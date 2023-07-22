@@ -15,6 +15,9 @@ return function()
 		size = 18,
 		text = "",
 		on_release = function()
+			awesome.emit_signal("popup::volume::visible")
+		end,
+		on_secondary_release = function()
 			awful.spawn(apps.default.sound_control, false)
 		end,
 		on_scroll_up = function()
