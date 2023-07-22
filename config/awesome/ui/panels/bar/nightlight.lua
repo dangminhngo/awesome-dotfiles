@@ -14,6 +14,7 @@ return function()
 		text = "",
 		tooltip = "Nightlight: OFF",
 		on_by_default = false,
+		animate_size = false,
 		on_turn_on = function(self)
 			awful.spawn.with_shell(apps.utils.nightlight .. " on")
 			self:set_text("")

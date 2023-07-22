@@ -14,6 +14,7 @@ return function()
 		text = "",
 		tooltip = "Idle Inhibit: OFF",
 		on_by_default = false,
+		animate_size = false,
 		on_turn_on = function(self)
 			awful.spawn.with_shell(apps.utils.idle .. " off")
 			self:set_text("")

@@ -36,7 +36,7 @@ local function new(args)
 		text = "",
 		tooltip = "Close",
 		font = beautiful.icon_font .. " Round ",
-		size = 8,
+		size = 10,
 		animate_size = false,
 		forced_width = dpi(20),
 		forced_height = dpi(20),
@@ -74,7 +74,11 @@ local function new(args)
 	local pu = awful.popup({
 		widget = {
 			titlebar,
-			args.child,
+			{
+				args.child,
+				margins = dpi(12),
+				widget = wibox.container.margin,
+			},
 			layout = wibox.layout.fixed.vertical,
 		},
 		screen = args.screen,

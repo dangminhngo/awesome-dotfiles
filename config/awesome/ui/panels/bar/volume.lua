@@ -14,27 +14,24 @@ return function()
 		font = beautiful.icon_font .. " Round ",
 		size = 18,
 		text = "",
+		animate_size = false,
 		on_release = function()
-			awesome.emit_signal("popup::volume::visible")
+			awesome.emit_signal("popup::volume::toggle")
 		end,
 		on_secondary_release = function()
 			awful.spawn(apps.default.sound_control, false)
-		end,
-		on_scroll_up = function()
-			awful.spawn.with_shell([[sh -c "pamixer -i 8"]])
-		end,
-		on_scroll_down = function()
-			awful.spawn.with_shell([[sh -c "pamixer -d 8"]])
 		end,
 	})
 
 	awful.widget.watch([[sh -c "pamixer --get-volume"]], 10, function(_, stdout)
 		local value = tonumber(helpers.misc.trim(stdout), 10)
+		awesome.emit_signal("popup::volume::change", value)
 		if value == nil then
 			return
 		end
 		awful.spawn.easy_async_with_shell([[sh -c "pamixer --get-mute"]], function(out)
 			local is_mute = helpers.misc.trim(out)
+			awesome.emit_signal("popup::volume::mute", is_mute == "true" and true or false)
 			if is_mute == "true" then
 				volume:set_text("")
 				volume:turn_off()
@@ -42,7 +39,7 @@ return function()
 			else
 				volume:turn_on()
 				if value == 0 then
-					volume:set_text("")
+					volume:set_text("")
 				elseif value <= 50 then
 					volume:set_text("")
 				else
@@ -50,6 +47,18 @@ return function()
 				end
 
 				volume:set_tooltip_text("Volume: " .. value .. "%")
+			end
+		end)
+
+		awesome.connect_signal("volume::mute", function(is_mute)
+			if is_mute then
+				volume:turn_off()
+				volume:set_text("")
+				volume:set_tooltip_text("Awkward silent")
+			else
+				volume:turn_on()
+				volume:set_text("")
+				volume:set_tooltip_text("Volume: Reading value")
 			end
 		end)
 

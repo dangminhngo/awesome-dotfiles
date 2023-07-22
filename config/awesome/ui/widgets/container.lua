@@ -73,7 +73,7 @@ local function new(args)
 		},
 	})
 
-	local tooltip = helpers.ui.add_tooltip(widget, args.tooltip or "")
+	local tooltip = helpers.ui.add_tooltip(widget, args.tooltip or nil)
 
 	function widget:set_tooltip_text(...)
 		tooltip:set_text(...)

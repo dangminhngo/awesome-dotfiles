@@ -14,6 +14,7 @@ local capture = widgets.button.text.normal({
 	size = 16,
 	text = "",
 	tooltip = "Capturing! Click to stop",
+	animate_size = false,
 	on_release = function(self)
 		awful.spawn.with_shell(scripts_dir .. "screencapture stop")
 		self:set_visible(false)

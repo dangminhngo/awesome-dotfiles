@@ -15,6 +15,7 @@ return function()
 		size = 18,
 		text = "",
 		on_by_default = true,
+		animate_size = false,
 		on_release = function()
 			awful.spawn(apps.default.network_manager, false)
 		end,

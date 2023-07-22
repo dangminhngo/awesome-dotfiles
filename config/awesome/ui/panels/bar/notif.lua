@@ -32,8 +32,11 @@ return function()
 		size = 16,
 		text = "",
 		tooltip = "There is no notifications",
+		animate_size = false,
 		on_by_default = true,
-		on_release = function() end,
+		on_release = function()
+			awesome.emit_signal("popup::notif::toggle")
+		end,
 		on_secondary_release = function(self)
 			naughty.suspended = not naughty.suspended
 			if naughty.suspended then
