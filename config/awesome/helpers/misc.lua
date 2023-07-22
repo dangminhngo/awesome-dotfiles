@@ -9,7 +9,12 @@ local capi = { awesome = awesome, client = client }
 
 local _misc = {}
 
--- Send key
+--- Get current timestamp
+function _misc.timestamp()
+	return os.date("%Y-%m-%dT%TZ")
+end
+
+--- Send key
 function _misc.send_key(c, key)
 	awful.spawn.with_shell("xdotool key --window " .. tostring(c.window) .. " " .. key)
 end

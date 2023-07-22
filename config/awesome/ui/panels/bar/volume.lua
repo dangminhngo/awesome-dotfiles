@@ -14,6 +14,7 @@ return function()
 		font = beautiful.icon_font .. " Round ",
 		size = 18,
 		text = "",
+		tooltip = "Volume",
 		animate_size = false,
 		on_release = function()
 			awesome.emit_signal("popup::volume::toggle")
@@ -58,7 +59,7 @@ return function()
 			else
 				volume:turn_on()
 				volume:set_text("")
-				volume:set_tooltip_text("Volume: Reading value")
+				volume:set_tooltip_text("Volume")
 			end
 		end)
 

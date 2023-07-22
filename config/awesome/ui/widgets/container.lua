@@ -73,14 +73,21 @@ local function new(args)
 		},
 	})
 
-	local tooltip = helpers.ui.add_tooltip(widget, args.tooltip or nil)
+	local tooltip = nil
+	if args.tooltip ~= nil then
+		tooltip = helpers.ui.add_tooltip(widget, args.tooltip)
+	end
 
 	function widget:set_tooltip_text(...)
-		tooltip:set_text(...)
+		if tooltip then
+			tooltip:set_text(...)
+		end
 	end
 
 	function widget:set_tooltip_markup(...)
-		tooltip:set_markup(...)
+		if tooltip then
+			tooltip:set_markup(...)
+		end
 	end
 
 	return widget

@@ -10,7 +10,7 @@ local popup = { mt = {} }
 
 local function new(args)
 	args = args or {}
-	args.screen = args.screen or screen.focused
+	args.screen = args.screen or awful.screen.focused()
 	args.title = args.title or "Popup"
 	args.minimum_width = args.minimum_width or dpi(320)
 	args.minimum_height = args.minimum_height or dpi(60)

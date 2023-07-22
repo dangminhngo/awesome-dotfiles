@@ -6,7 +6,6 @@ local dpi = xresources.apply_dpi
 local naughty = require("naughty")
 local helpers = require("helpers")
 local menubar = require("menubar")
-local animation = require("modules.animation")
 local widgets = require("ui.widgets")
 
 --- Naughty Notifications with animation
@@ -17,6 +16,7 @@ naughty.config.defaults.ontop = true
 naughty.config.defaults.timeout = 10
 naughty.config.defaults.title = "System"
 naughty.config.defaults.position = "bottom_right"
+naughty.config.spacing = dpi(6)
 
 local function get_oldest_notification()
 	for _, notification in ipairs(naughty.active) do
@@ -28,6 +28,14 @@ local function get_oldest_notification()
 	--- Fallback to first one.
 	return naughty.active[1]
 end
+
+_G.notifications = {}
+
+--- Add notification to the list
+naughty.connect_signal("added", function(n)
+	n.timestamp = helpers.misc.timestamp()
+	table.insert(_G.notifications, 1, n)
+end)
 
 --- Handle notification icon
 naughty.connect_signal("request::icon", function(n, context, hints)
@@ -50,181 +58,7 @@ naughty.connect_signal("request::action_icon", function(a, context, hints)
 end)
 
 naughty.connect_signal("request::display", function(n)
-	--- table of icons
-	local app_icons = {
-		["firefox"] = { icon = "" },
-		["discord"] = { icon = "" },
-		["music"] = { icon = "" },
-		["Screenshot"] = { icon = "" },
-		["Color Picker"] = { icon = "" },
-	}
-
-	local app_icon = nil
-	local tolow = string.lower
-
-	if app_icons[tolow(n.app_name)] then
-		app_icon = app_icons[tolow(n.app_name)].icon
-	else
-		app_icon = ""
-	end
-
-	local app_icon_n = wibox.widget({
-		{
-			font = beautiful.icon_font .. "Round 10",
-			markup = "<span foreground='" .. beautiful.notification_bg .. "'>" .. app_icon .. "</span>",
-			align = "center",
-			valign = "center",
-			widget = wibox.widget.textbox,
-		},
-		bg = beautiful.accent,
-		widget = wibox.container.background,
-		shape = gears.shape.circle,
-		forced_height = dpi(20),
-		forced_width = dpi(20),
-	})
-
-	local icon = wibox.widget({
-		{
-			{
-				{
-					image = n.icon,
-					resize = true,
-					clip_shape = gears.shape.circle,
-					halign = "center",
-					valign = "center",
-					widget = wibox.widget.imagebox,
-				},
-				border_width = dpi(2),
-				border_color = beautiful.accent,
-				shape = gears.shape.circle,
-				widget = wibox.container.background,
-			},
-			strategy = "exact",
-			height = dpi(36),
-			width = dpi(36),
-			widget = wibox.container.constraint,
-		},
-		{
-			nil,
-			nil,
-			{
-				nil,
-				nil,
-				app_icon_n,
-				layout = wibox.layout.align.horizontal,
-				expand = "none",
-			},
-			layout = wibox.layout.align.vertical,
-			expand = "none",
-		},
-		layout = wibox.layout.stack,
-	})
-
-	local app_name = widgets.text({
-		size = 10,
-		bold = true,
-		text = n.app_name:gsub("^%l", string.upper),
-	})
-
-	local dismiss = widgets.button.text.normal({
-		font = beautiful.icon_font .. " Round ",
-		paddings = dpi(2),
-		size = 8,
-		bold = true,
-		text = "",
-		text_normal_bg = beautiful.fg,
-		tooltip = "Dismiss",
-		animate_size = false,
-		on_release = function()
-			n:destroy(naughty.notification_closed_reason.dismissed_by_user)
-		end,
-	})
-
-	local timeout_arc = wibox.widget({
-		widget = wibox.container.arcchart,
-		forced_width = dpi(24),
-		forced_height = dpi(24),
-		max_value = 100,
-		min_value = 0,
-		value = 0,
-		thickness = dpi(4),
-		rounded_edge = true,
-		bg = beautiful.notification_bg,
-		colors = {
-			{
-				type = "linear",
-				from = { 0, 0 },
-				to = { 400, 400 },
-				stops = {
-					{ 0, beautiful.accent },
-					{ 0.2, beautiful.blue },
-					{ 0.4, beautiful.yellow },
-					{ 0.6, beautiful.orange },
-					{ 0.8, beautiful.red },
-				},
-			},
-		},
-		dismiss,
-	})
-
-	local title = wibox.widget({
-		widget = wibox.container.scroll.horizontal,
-		step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
-		fps = 60,
-		speed = 75,
-		widgets.text({
-			font = beautiful.font_name,
-			bold = true,
-			size = 11,
-			text = n.title,
-		}),
-	})
-
-	local message = wibox.widget({
-		widget = wibox.container.scroll.horizontal,
-		step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
-		fps = 60,
-		speed = 75,
-		widgets.text({
-			font = beautiful.font_name,
-			size = 11,
-			text = n.message,
-		}),
-	})
-
-	local actions = wibox.widget({
-		notification = n,
-		base_layout = wibox.widget({
-			spacing = dpi(6),
-			layout = wibox.layout.flex.horizontal,
-		}),
-		widget_template = {
-			{
-				{
-					{
-						id = "text_role",
-						font = beautiful.notification_font,
-						widget = wibox.widget.textbox,
-					},
-					left = dpi(6),
-					right = dpi(6),
-					widget = wibox.container.margin,
-				},
-				widget = wibox.container.place,
-			},
-			bg = beautiful.bg0,
-			forced_height = dpi(32),
-			forced_width = dpi(70),
-			shape = helpers.ui.rrect(dpi(4)),
-			widget = wibox.container.background,
-		},
-		style = {
-			underline_normal = false,
-			underline_selected = true,
-		},
-		widget = naughty.list.actions,
-	})
-
+	local notif_widget = widgets.notification.popup(n)
 	local widget = naughty.layout.box({
 		notification = n,
 		type = "notification",
@@ -236,90 +70,11 @@ naughty.connect_signal("request::display", function(n)
 		minimum_width = dpi(400),
 		minimum_height = dpi(120),
 		bg = "#00000000",
-		widget_template = {
-			{
-				layout = wibox.layout.fixed.vertical,
-				{
-					{
-						{
-							layout = wibox.layout.align.horizontal,
-							app_name,
-							nil,
-							timeout_arc,
-						},
-						margins = { top = dpi(5), bottom = dpi(5), left = dpi(15), right = dpi(15) },
-						widget = wibox.container.margin,
-					},
-					bg = beautiful.notification_bg_alt,
-					widget = wibox.container.background,
-				},
-				{
-					{
-						layout = wibox.layout.fixed.vertical,
-						{
-							layout = wibox.layout.fixed.horizontal,
-							spacing = dpi(10),
-							icon,
-							{
-								expand = "none",
-								layout = wibox.layout.align.vertical,
-								nil,
-								{
-									layout = wibox.layout.fixed.vertical,
-									title,
-									message,
-								},
-								nil,
-							},
-						},
-						{
-							helpers.ui.vertical_pad(dpi(16)),
-							{
-								actions,
-								shape = helpers.ui.rrect(beautiful.border_radius / 2),
-								widget = wibox.container.background,
-							},
-							visible = n.actions and #n.actions > 0,
-							layout = wibox.layout.fixed.vertical,
-						},
-					},
-					margins = dpi(15),
-					widget = wibox.container.margin,
-				},
-			},
-			--- Anti-aliasing container
-			shape = helpers.ui.rrect(beautiful.border_radius),
-			bg = beautiful.notification_bg,
-			widget = wibox.container.background,
-		},
+		widget_template = notif_widget,
 	})
 
 	--- Don't destroy the notification on click
 	widget.buttons = {}
-
-	local anim = animation:new({
-		duration = n.timeout,
-		target = 100,
-		easing = animation.easing.linear,
-		reset_on_stop = false,
-		update = function(_, pos)
-			timeout_arc.value = pos
-		end,
-	})
-
-	anim:connect_signal("ended", function()
-		n:destroy()
-	end)
-
-	widget:connect_signal("mouse::enter", function()
-		--- Absurdly big number because setting it to 0 doesn't work
-		n:set_timeout(4294967)
-		anim:stop()
-	end)
-
-	widget:connect_signal("mouse::leave", function()
-		anim:start()
-	end)
 
 	local notification_height = widget.height + beautiful.notification_spacing
 	local total_notifications_height = #naughty.active * notification_height
@@ -327,24 +82,24 @@ naughty.connect_signal("request::display", function(n)
 	if total_notifications_height > n.screen.workarea.height then
 		get_oldest_notification():destroy(naughty.notification_closed_reason.too_many_on_screen)
 	end
-
-	anim:start()
 end)
 
--- naughty.notification({
--- 	title = "Hello World",
--- 	message = "I am the message for you",
--- 	app_name = "Screenshot",
--- 	timeout = 100,
--- 	actions = {
--- 		naughty.action({
--- 			name = "Accept",
--- 		}),
--- 		naughty.action({
--- 			name = "Refuse",
--- 		}),
--- 		naughty.action({
--- 			name = "Ignore",
--- 		}),
--- 	},
--- })
+for i = 1, 10 do
+	naughty.notification({
+		title = "Notif " .. i,
+		message = "I am the message for you",
+		app_name = "Screenshot",
+		timeout = 100,
+		actions = {
+			naughty.action({
+				name = "Accept",
+			}),
+			naughty.action({
+				name = "Refuse",
+			}),
+			naughty.action({
+				name = "Ignore",
+			}),
+		},
+	})
+end

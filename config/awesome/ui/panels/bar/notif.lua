@@ -39,18 +39,22 @@ return function()
 		end,
 		on_secondary_release = function(self)
 			naughty.suspended = not naughty.suspended
-			if naughty.suspended then
-				self:turn_off()
-				self:set_text("")
-				num:get_children_by_id("num")[1]:set_text("")
-				self:set_tooltip_text("Do not disturb")
-			else
-				self:turn_on()
-				self:set_text("")
-				self:set_tooltip_text("There is no notifications")
-			end
+			awesome.emit_signal("notification-center::toggle_dnd")
 		end,
 	})
+
+	awesome.connect_signal("notification-center::toggle_dnd", function()
+		if naughty.suspended then
+			notif:turn_off()
+			notif:set_text("")
+			num:get_children_by_id("num")[1]:set_text("")
+			notif:set_tooltip_text("Do not disturb")
+		else
+			notif:turn_on()
+			notif:set_text("")
+			notif:set_tooltip_text("There is no notifications")
+		end
+	end)
 
 	local widget = wibox.widget({
 		notif,
