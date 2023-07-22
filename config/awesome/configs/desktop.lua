@@ -39,14 +39,22 @@ end)
 
 --- Wallpapers
 --- ~~~~~~~~~-
-awful.screen.connect_for_each_screen(function(s)
-	if beautiful.wallpaper then
-		local wallpaper = beautiful.wallpaper
+--- Change wallpaper after every 30 mins
+gears.timer({
+	timeout = 60 * 30,
+	call_now = true,
+	autostart = true,
+	callback = function()
+		awful.screen.connect_for_each_screen(function(s)
+			if beautiful.wallpaper then
+				local wallpaper = beautiful.random_wallpaper()
 
-		if type(wallpaper) == "function" then
-			wallpaper = wallpaper(s)
-		end
+				if type(wallpaper) == "function" then
+					wallpaper = wallpaper(s)
+				end
 
-		gears.wallpaper.maximized(wallpaper, s, false, nil)
-	end
-end)
+				gears.wallpaper.maximized(wallpaper, s, false, nil)
+			end
+		end)
+	end,
+})

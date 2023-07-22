@@ -136,7 +136,11 @@ theme.wibar_bg = theme.dark
 theme.wibar_height = dpi(40)
 
 -- UI ELEMENTS
-theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/wallpaper.png")
+theme.random_wallpaper = function()
+	return gears.surface.load_uncached(
+		gfs.get_configuration_dir() .. "theme/wallpapers/wallpaper" .. math.random(0, 8) .. ".png"
+	)
+end
 theme.avatar = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/avatar.png")
 
 --- Layout
