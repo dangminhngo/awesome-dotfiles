@@ -84,22 +84,23 @@ naughty.connect_signal("request::display", function(n)
 	end
 end)
 
-for i = 1, 10 do
-	naughty.notification({
-		title = "Notif " .. i,
-		message = "I am the message for you",
-		app_name = "Screenshot",
-		timeout = 100,
-		actions = {
-			naughty.action({
-				name = "Accept",
-			}),
-			naughty.action({
-				name = "Refuse",
-			}),
-			naughty.action({
-				name = "Ignore",
-			}),
-		},
-	})
-end
+-- -- Uncomment this for testing notifications
+-- for i = 1, 10 do
+-- 	naughty.notification({
+-- 		title = "Notif " .. i,
+-- 		message = "I am the message for you",
+-- 		app_name = "Screenshot",
+-- 		timeout = 100,
+-- 		actions = {
+-- 			naughty.action({
+-- 				name = "Accept",
+-- 			}),
+-- 			naughty.action({
+-- 				name = "Refuse",
+-- 			}),
+-- 			naughty.action({
+-- 				name = "Ignore",
+-- 			}),
+-- 		},
+-- 	})
+-- end
