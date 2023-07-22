@@ -154,7 +154,12 @@ theme.layout_centered = icons.centered
 theme.icon_theme = "Papirus-Dark"
 
 --- Borders
-theme.border_width = 0
+theme.border_width = dpi(0)
+theme.border_color_marked = theme.blue
+theme.border_color_active = theme.accent
+theme.border_color_normal = theme.bg
+theme.border_color_urgent = theme.red
+theme.border_color_floating = theme.accent
 
 -- Corner Radius
 theme.border_radius = 0

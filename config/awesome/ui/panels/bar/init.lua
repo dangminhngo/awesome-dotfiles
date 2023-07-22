@@ -2,6 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local helpers = require("helpers")
 local xrs = require("beautiful.xresources")
 local dpi = xrs.apply_dpi
 local wbutton = require("ui.widgets.button")
@@ -232,9 +233,9 @@ return function(s)
 			{
 				{
 					{
-						s.clock,
+						helpers.ui.horizontal_pad(dpi(1)),
 						s.stats,
-						spacing = dpi(12),
+						spacing = dpi(5),
 						layout = wibox.layout.fixed.horizontal,
 					},
 					tag_list(s),
@@ -246,6 +247,7 @@ return function(s)
 						s.nightlight,
 						s.notif,
 						s.ethernet,
+						s.clock,
 						layoutbox(),
 						layout = wibox.layout.fixed.horizontal,
 					},
