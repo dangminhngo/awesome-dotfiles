@@ -30,6 +30,8 @@ return {
 		power_manager = "xfce4-power-manager",
 		--- Default rofi global menu
 		launcher = scripts_dir .. "menu launcher",
+		--- Default Stats
+		stats = "alacritty --class btop --title btop -e btop",
 	},
 
 	--- List of binaries/shell scripts that will execute for a certain task

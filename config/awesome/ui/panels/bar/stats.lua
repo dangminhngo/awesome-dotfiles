@@ -1,9 +1,10 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local wibox = require("wibox")
+local gears = require("gears")
 local widgets = require("ui.widgets")
-local helpers = require("helpers")
+local apps = require("configs.apps")
+local dpi = beautiful.xresources.apply_dpi
 
 -- Stats Widget
 --- CPU
@@ -114,6 +115,10 @@ return function()
 		spacing = dpi(12),
 		layout = wibox.layout.fixed.horizontal,
 	})
+
+	stats:buttons(gears.table.join(awful.button({}, 1, nil, function()
+		awful.spawn(apps.default.stats)
+	end)))
 
 	return stats
 end

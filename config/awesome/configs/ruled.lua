@@ -119,12 +119,13 @@ ruled.client.connect_signal("request::rules", function()
 			class = {
 				"feh",
 				"imv",
+				"btop",
 			},
 		},
 		properties = {
 			floating = true,
-			width = screen_width * 0.7,
-			height = screen_height * 0.75,
+			width = screen_width * 0.8,
+			height = screen_height * 0.8,
 		},
 		callback = function(c)
 			awful.placement.centered(c, { honor_padding = true, honor_workarea = true })
