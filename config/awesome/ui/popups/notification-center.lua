@@ -104,8 +104,9 @@ return function()
 		},
 		title = "Notification Center",
 		minimum_height = workarea_height - beautiful.useless_gap * 2 - dpi(52),
-		minimum_width = dpi(400),
-		width = dpi(400),
+		minimum_width = dpi(440),
+		maximum_width = dpi(440),
+		width = dpi(440),
 		bg = beautiful.bg,
 		on_close = function()
 			awesome.emit_signal("popup::notif::hidden")
