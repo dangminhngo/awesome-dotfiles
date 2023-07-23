@@ -82,8 +82,11 @@ paru -S --noconfirm --needed \
     socat \
     starship \
     stylua \
+    tmux \
+    transmission-gtk \
     tree \
     ttf-roboto \
+    udisks2 \
     unzip \
     xdg-desktop-portal \
     xdg-utils \
