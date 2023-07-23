@@ -14,7 +14,7 @@ _sddm.gen = function(pal)
 Background="greeting.png"
 ## Path relative to the theme root directory. Most standard image file formats are allowed including support for transparency. (e.g. background.jpeg/illustration.GIF/Foto.png/undraw.svgz)
 
-DimBackgroundImage="0.0"
+DimBackgroundImage="0.5"
 ## Double between 0 and 1 used for the alpha channel of a darkening overlay. Use to darken your background image on the fly.
 
 ScaleImageCropped="true"
