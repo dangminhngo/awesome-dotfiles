@@ -14,6 +14,9 @@
 set -U fish_greeting
 
 set -Ux PNPM_HOME $HOME/.local/share/pnpm
+set -Ux GTK_IM_MODULE ibus
+set XMODIFIERS "@im=ibus"
+set QT_IM_MODULE ibus
 
 # Add paths
 fish_add_path -g ~/.local/bin $PNPM_HOME $HOME/.local/share/fnm
