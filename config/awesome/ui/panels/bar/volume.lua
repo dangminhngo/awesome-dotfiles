@@ -51,19 +51,29 @@ return function()
 			end
 		end)
 
-		awesome.connect_signal("volume::mute", function(is_mute)
-			if is_mute then
-				volume:turn_off()
-				volume:set_text("")
-				volume:set_tooltip_text("Awkward silent")
-			else
-				volume:turn_on()
-				volume:set_text("")
-				volume:set_tooltip_text("Volume")
-			end
-		end)
-
 		collectgarbage("collect")
+	end)
+
+	awesome.connect_signal("volume::mute", function(is_mute)
+		if is_mute then
+			volume:turn_off()
+			volume:set_text("")
+			volume:set_tooltip_text("Awkward silent")
+		else
+			volume:turn_on()
+			volume:set_text("")
+			volume:set_tooltip_text("Volume")
+		end
+	end)
+
+	awesome.connect_signal("volume::change", function(value)
+		if value == 0 then
+			volume:set_text("")
+		elseif value <= 50 then
+			volume:set_text("")
+		else
+			volume:set_text("")
+		end
 	end)
 
 	return volume

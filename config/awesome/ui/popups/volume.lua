@@ -84,6 +84,7 @@ return function()
 	slider:connect_signal("property::value", function(_, value)
 		awful.spawn.easy_async_with_shell('sh -c "pamixer --set-volume ' .. value .. '"', function() end)
 		vol:get_children_by_id("value")[1]:set_text(value .. "%")
+		awesome.emit_signal("volume::change", value)
 	end)
 
 	awesome.connect_signal("popup::volume::change", function(value)
