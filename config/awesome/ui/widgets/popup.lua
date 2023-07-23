@@ -38,8 +38,8 @@ local function new(args)
 		font = beautiful.icon_font .. " Round ",
 		size = 10,
 		animate_size = false,
-		forced_width = dpi(20),
-		forced_height = dpi(20),
+		forced_width = dpi(18),
+		forced_height = dpi(18),
 		normal_shape = gears.shape.circle,
 		on_release = function()
 			if args.on_close ~= nil then
