@@ -88,6 +88,7 @@ paru -S --noconfirm --needed \
     ttf-roboto \
     udisks2 \
     unzip \
+    upower \
     xdg-desktop-portal \
     xdg-utils \
     xdg-user-dirs \
