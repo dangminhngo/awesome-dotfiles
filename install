@@ -159,7 +159,7 @@ sleep 1
 # Install GTK themes
 echo "Installing GTK themes..."
 git clone https://github.com/dangminhngo/gtktheme-generator.git
-cp -R gtktheme-generator/themes/Proxima ~/.local/share/themes/
+cp -R gtktheme-generator/themes/Crux-Alpha-Green ~/.local/share/themes/
 rm -rf gtktheme-generator
 
 sleep 1
