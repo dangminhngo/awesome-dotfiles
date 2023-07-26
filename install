@@ -118,7 +118,7 @@ sudo git clone https://github.com/Kangie/sddm-sugar-candy.git /usr/share/sddm/th
 paru -S --needed --noconfirm qt5-graphicaleffects qt5-quickcontrols2 qt5-svg
 sudo rsync --recursive ./system/sddm.conf.d /etc/
 sudo rsync ./config/sddm-sugarcandy/theme.conf /usr/share/sddm/themes/sugar-candy/
-sudo rsync ./config/awesome/theme/assets/greeting.jpg /usr/share/sddm/themes/sugar-candy/
+sudo rsync ./config/awesome/theme/assets/greeting.png /usr/share/sddm/themes/sugar-candy/
 
 echo "Creating default user directories..."
 xdg-user-dirs-update
