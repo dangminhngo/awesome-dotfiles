@@ -18,6 +18,7 @@ return function(s)
 	s.idle = require("ui.panels.bar.idle")()
 	s.capture = require("ui.panels.bar.capture").widget()
 	s.stats = require("ui.panels.bar.stats")()
+	s.power = require("ui.panels.bar.power")()
 
 	-- Animated taglist
 	-- Taglist buttons
@@ -233,7 +234,7 @@ return function(s)
 			{
 				{
 					{
-						helpers.ui.horizontal_pad(dpi(1)),
+						layoutbox(),
 						s.stats,
 						spacing = dpi(5),
 						layout = wibox.layout.fixed.horizontal,
@@ -248,7 +249,7 @@ return function(s)
 						s.notif,
 						s.ethernet,
 						s.clock,
-						layoutbox(),
+						s.power,
 						layout = wibox.layout.fixed.horizontal,
 					},
 					layout = wibox.layout.align.horizontal,
