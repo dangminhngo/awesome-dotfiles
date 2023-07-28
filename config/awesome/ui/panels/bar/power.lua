@@ -10,7 +10,7 @@ return function()
 		text_normal_bg = beautiful.red,
 		normal_bg = beautiful.wibar_bg,
 		font = beautiful.icon_font .. " Round ",
-		size = 18,
+		size = 16,
 		text = "",
 		tooltip = "Power",
 		animate_size = false,
