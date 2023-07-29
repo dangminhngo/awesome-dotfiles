@@ -41,7 +41,7 @@ end)
 --- ~~~~~~~~~-
 --- Change wallpaper after every 30 mins
 gears.timer({
-	timeout = 60 * 15,
+	timeout = 60 * 60,
 	call_now = true,
 	autostart = true,
 	callback = function()
