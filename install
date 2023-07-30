@@ -180,7 +180,8 @@ sleep 1
 # Clean up
 echo "Cleaning up..."
 paru -Rns (paru -Qdtq)
+paru -R xdg-desktop-portal-gnome
 
 sleep 1
 
-echo "Reboot to your system and Happy coding!"
+echo "Reboot to your system and Enjoy!"
