@@ -44,11 +44,13 @@ return {
 		color_picker = scripts_dir .. "menu colorpicker",
 		--- Nightlight
 		nightlight = scripts_dir .. "utils nightlight",
-		--- Idle
-		idle = scripts_dir .. "utils idle",
+		--- Idle Inhibitor
+		idle_inhibit = scripts_dir .. "utils idle-inhibit",
 		--- Exit Menu
 		exit = scripts_dir .. "menu powermenu",
 		--- Window Picker
 		window_picker = scripts_dir .. "menu windowpicker",
+		--- Turn off the screen
+		screen_off = "xset dpms force off && " .. scripts_dir .. "utils lock",
 	},
 }

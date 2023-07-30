@@ -15,7 +15,7 @@ return function(s)
 	s.volume = require("ui.panels.bar.volume")()
 	s.notif = require("ui.panels.bar.notif")()
 	s.nightlight = require("ui.panels.bar.nightlight")()
-	s.idle = require("ui.panels.bar.idle")()
+	s.idle_inhibit = require("ui.panels.bar.idle-inhibit")()
 	s.capture = require("ui.panels.bar.capture").widget()
 	s.stats = require("ui.panels.bar.stats")()
 	s.power = require("ui.panels.bar.power")()
@@ -244,7 +244,7 @@ return function(s)
 						system_tray(),
 						s.capture,
 						s.volume,
-						s.idle,
+						s.idle_inhibit,
 						s.nightlight,
 						s.notif,
 						s.ethernet,

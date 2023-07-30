@@ -15,11 +15,6 @@ local function autostart()
 	helpers.run.run_once_ps("polkit-kde-authentication-agent-1", "/usr/lib/polkit-kde-authentication-agent-1")
 	-- Inputs
 	helpers.run.run("xset r rate 400 50")
-	--- Other stuff (if needed)
-	-- helpers.run.run_once_grep("blueman-applet")
-	-- helpers.run.run_once_grep("nm-applet")
-	-- Idle manager
-	helpers.run.run_once_grep(apps.utils.idle .. " on")
 end
 
 autostart()

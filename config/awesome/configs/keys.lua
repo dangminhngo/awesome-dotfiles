@@ -188,6 +188,10 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ mod, alt }, "l", function()
 		lock_screen_show()
 	end, { description = "lock screen", group = "hotkeys" }),
+	--- Turn the screen off then lock
+	awful.key({ mod, shift }, "l", function()
+		awful.spawn.easy_async_with_shell(apps.utils.screen_off, function() end)
+	end, { description = "turn the screen off", group = "hotkeys" }),
 })
 
 --- Client key bindings
