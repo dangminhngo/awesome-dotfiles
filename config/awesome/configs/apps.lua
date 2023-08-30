@@ -51,6 +51,6 @@ return {
 		--- Window Picker
 		window_picker = scripts_dir .. "menu windowpicker",
 		--- Turn off the screen
-		screen_off = "xset dpms force off && " .. scripts_dir .. "utils lock",
+		screen_off = scripts_dir .. "utils lock" .. " && xset dpms force off",
 	},
 }
