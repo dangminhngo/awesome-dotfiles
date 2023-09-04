@@ -34,6 +34,7 @@ paru -S --noconfirm --needed \
     alacritty \
     awesome-git \
     base-devel \
+    bibata-cursor-theme \
     btop \
     calc \
     clang \
@@ -48,7 +49,6 @@ paru -S --noconfirm --needed \
     fish \
     git \
     go \
-    googledot-cursor-theme \
     golangci-lint \
     gpick \
     gtk3 \
